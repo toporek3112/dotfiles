@@ -1,0 +1,236 @@
+kctx() {
+  local GREEN="\033[0;32m"
+  local ORANGE="\033[0;33m"
+  local RED="\033[0;31m"
+  local BLUE="\033[0;34m"
+  local NC="\033[0m"
+
+  local re_filter=""
+  local all_flag=false
+  local file_flag=""
+  local args=()
+
+  # Parse flags
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -re)
+        shift
+        re_filter="$1"
+        ;;
+      --all)
+        all_flag=true
+        ;;
+      --file|-f)
+        shift
+        file_flag="$1"
+        ;;
+      *)
+        args+=("$1")
+        ;;
+    esac
+    shift
+  done
+
+  local clusters=($HOME/.kube/clusters/*)
+  if [[ -n "$re_filter" ]]; then
+    clusters=($(printf "%s\n" "${clusters[@]}" | grep -E "$re_filter"))
+  fi
+
+  # Filter by file if provided
+  if [[ -n "$file_flag" ]]; then
+    if [[ ! -f "$file_flag" ]]; then
+      echo "Error: File '$file_flag' not found." >&2
+      return 1
+    fi
+    
+    # Create associative array for O(1) lookups
+    local -A file_cluster_names
+    while IFS= read -r line; do
+      line="${line##[[:space:]]}"
+      line="${line%%[[:space:]]}"
+      [[ -z "$line" || "$line" == \#* ]] && continue
+      file_cluster_names[$line]=1
+    done < "$file_flag"
+    
+    if [[ ${#file_cluster_names[@]} -eq 0 ]]; then
+      echo "Error: No cluster names found in file '$file_flag'." >&2
+      return 1
+    fi
+    
+    local matched_clusters=()
+    for cluster_path in "${clusters[@]}"; do
+      local cluster_name=$(basename "$cluster_path")
+      [[ -n "${file_cluster_names[$cluster_name]}" ]] && matched_clusters+=("$cluster_path")
+    done
+    
+    if [[ ${#matched_clusters[@]} -eq 0 ]]; then
+      echo "Error: No matching clusters found for names in file '$file_flag'." >&2
+      return 1
+    fi
+    
+    clusters=("${matched_clusters[@]}")
+  fi
+
+  if [[ ${#clusters[@]} -eq 0 ]]; then
+    echo "No matching clusters found." >&2
+    return 1
+  fi
+
+  if [[ ${#args[@]} -eq 0 && "$all_flag" = false ]]; then
+    local selected_cluster=$(printf "%s\n" "${clusters[@]}" | fzf)
+    [[ -z "$selected_cluster" ]] && echo "No cluster selected." && return 1
+
+    export KUBECONFIG=$(realpath "$selected_cluster")
+    local cluster_name=$(basename "$KUBECONFIG")
+
+    local color=$NC
+    [[ "$cluster_name" == *-dev* ]] && color=$GREEN
+    [[ "$cluster_name" == *-nonprod* ]] && color=$ORANGE
+    [[ "$cluster_name" == *-prod* ]] && color=$RED
+
+    echo -e "Switched KUBECONFIG to cluster: ${color}\033[1m${(U)cluster_name}\033[0m${NC}"
+  else
+    local user_cmd=("${args[@]}")
+    local selected_clusters
+
+    if [[ "$all_flag" = true ]]; then
+      selected_clusters=("${clusters[@]}")
+    else
+      selected_clusters=($(printf "%s\n" "${clusters[@]}" | fzf --multi --preview="cat {}"))
+      [[ -z "$selected_clusters" ]] && echo "No clusters selected." && return 1
+    fi
+
+    for config in "${selected_clusters[@]}"; do
+      local cluster_name=$(basename "$config")
+      local color=$BLUE
+      [[ "$cluster_name" == *-dev* ]] && color=$GREEN
+      [[ "$cluster_name" == *-nonprod* ]] && color=$ORANGE
+      [[ "$cluster_name" == *-prod* ]] && color=$RED
+
+      echo -e "Executing on cluster: ${color}\033[1m${cluster_name}\033[0m${NC}"
+
+      KUBECONFIG=$(realpath "$config") eval "${user_cmd[*]}"
+      [[ $? -ne 0 ]] && echo -e "${RED}Command failed or timed out on ${cluster_name}${NC}\n"
+      echo ""
+    done
+  fi
+}
+
+ssh_multi_node() {
+    local USER=""
+    local CONFIG_FILE="$HOME/.ssh/config"
+    
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --config)
+                CONFIG_FILE="$2"
+                shift 2
+                ;;
+            --user)
+                USER="$2"
+                shift 2
+                ;;
+            *)
+                echo "Unknown option: $1"
+                echo "Usage: ssh_multi_node [--config CONFIG_FILE] [--user USERNAME]"
+                return 1
+                ;;
+        esac
+    done
+    
+    # Check if config file exists
+    if [[ ! -f "$CONFIG_FILE" ]]; then
+        echo "Error: Config file '$CONFIG_FILE' not found."
+        return 1
+    fi
+    
+    # Extract SSH hosts (excluding wildcards)
+    HOSTS=($(awk '/^Host / { for (i=2; i<=NF; i++) if ($i != "*" && $i !~ /^\*/) print $i }' "$CONFIG_FILE"))
+    
+    if [ ${#HOSTS[@]} -eq 0 ]; then
+        echo "No hosts found in config file '$CONFIG_FILE'."
+        return 1
+    fi
+    
+    # Let user select one or more hosts via fzf
+    SELECTED=(${(f)"$(printf "%s\n" "${HOSTS[@]}" | fzf --multi --prompt="Select hosts > ")"})
+    
+    if [ ${#SELECTED[@]} -eq 0 ]; then
+        echo "No hosts selected."
+        return 1
+    fi
+    
+    # Debug: show what was selected
+    echo "Selected hosts: ${SELECTED[@]}"
+    
+    SESSION_NAME="multi-node-${SELECTED[1]}-session"
+    
+    # Build SSH command
+    if [[ -n "$USER" ]]; then
+        ssh_cmd="ssh $USER@"
+    else
+        ssh_cmd="ssh "
+    fi
+    
+    # Start new tmux session with the first host
+    tmux new-session -d -s "$SESSION_NAME" "${ssh_cmd}${SELECTED[1]}"
+    
+    # Give the first connection a moment to establish
+    sleep 1
+    if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
+        echo "Error: SSH connection to ${SELECTED[1]} failed. Session exited."
+        return 1
+    fi
+    
+    # Add each additional host as a new pane
+    for ((i=2; i<=${#SELECTED[@]}; i++)); do
+        tmux split-window -t "$SESSION_NAME" -h "${ssh_cmd}${SELECTED[i]}"
+        tmux select-layout -t "$SESSION_NAME" tiled >/dev/null
+    done
+    
+    # Final layout and sync
+    tmux select-layout -t "$SESSION_NAME" tiled
+    tmux setw -t "$SESSION_NAME" synchronize-panes on
+    tmux attach -t "$SESSION_NAME"
+}
+
+say () {
+    local opt=""
+    [[ "$1" == "-o" ]] && opt="-o"  # Use -o only when explicitly passed
+    fortune $opt -s | cowthink -f "$(command ls /usr/share/cowsay/cows | shuf -n1 | cut -d '.' -f1)" | lolcat
+}
+
+commit_type_from_repo() {
+ local default="fix(): "
+ # Check if we're in a git repository
+ if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+  echo "$default"
+  return 0
+ fi
+
+ local git_root
+ git_root=$(git rev-parse --show-toplevel)
+ local cmsg_file="$git_root/.github/cmsg"
+
+ # Check if cmsg exists
+ if [[ ! -f "$cmsg_file" ]]; then
+  echo "$default"
+  return 0
+ fi
+
+ # Format: one "type: description" per line
+ # Shows only the type in the list, description in preview
+ local selection
+ selection=$(grep -v '^#' "$cmsg_file" | grep -v '^$' | \
+  fzf --prompt='git commit "" ' \
+    --height=2% \
+    --with-nth=1 \
+    --delimiter=': ' \
+    --preview-window=right:80% \
+    --preview='echo {} | cut -d: -f2-')
+  
+ # If nothing selected (cancelled), return default
+ [[ -z "$selection" ]] && echo "$default" && return 0
+ echo "${selection%%:*}(): "
+}
