@@ -15,7 +15,7 @@ local vars = require("modules.vars")
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function () 
   hl.exec_cmd(vars.terminal)
-  hl.exec_cmd("waybar & hyprshot & swaync & firefox & spotify-launcher & obsidian")
+  hl.exec_cmd("waybar & hyprshot & swaync & hyperpaper & firefox & spotify-launcher & obsidian")
 end)
 
 -------------------------------
