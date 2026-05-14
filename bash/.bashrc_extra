@@ -1,0 +1,78 @@
+# fun
+alias tux="fortune -o -s | cowthink -f tux | lolcat"
+
+# velero
+alias vbg="velero backup get"
+alias vbd="velero backup delete"
+alias vbc="velero backup create"
+alias vrg="velero restore get"
+
+# rstudio
+alias rstudio="/mnt/c/Program\ Files/RStudio/rstudio.exe"
+
+# ansible
+# alias ac='docker run --rm --network -e "ANSIBLE_HOST_KEY_CHECKING=False" host -v "$(pwd)":/ansible -w /ansible quay.io/ansible/ansible-runner:stable-2.12-latest'
+
+# custom
+# alias cheader='sh ~/personal/header-comment.sh'
+# alias echodiff='function _echodiff() { diff <(echo "$1") <(echo "$2"); }; _echodiff'
+
+# todo: export this to .env files in https://github.com/toporek3112/vienna_public-transport_weather_correlation 
+# dsi_project
+# alias set_producer_delays='export MODE="producer_delays" ;
+# export KAFKA_HOST="localhost:9092" ;
+# export KAFKA_TOPIC="topic_delays" ;
+# export SOURCE_URL="https://öffi.at/?archive=1&text=&types=2%2C3&page=" ;
+# export TIMEOUT_SECONDS="10" ;
+# export DB_CONNECTION="postgresql://postgres:postgres@localhost:5432/dsi_project" ;
+# '
+
+# alias set_producer_weather='export MODE="producer_weather" ;
+# export KAFKA_HOST="localhost:9092" ;
+# export KAFKA_TOPIC="topic_weather" ;
+# export KAFKA_INTERRUPTION_TOPIC="topic_delays" ;
+# export SOURCE_URL="https://archive-api.open-meteo.com/v1/archive"
+# export DB_CONNECTION="postgresql://postgres:postgres@localhost:5432/dsi_project" ;
+# '
+
+# alias set_consumer='
+# export MODE="consumer" ;
+# export KAFKA_HOST="localhost:9092" ;
+# export DB_CONNECTION="postgresql://postgres:postgres@localhost:5432/dsi_project" ;
+# '
+
+# alias set_setup_db='export MODE="setup_db" ;
+# export DB_TABLE="stops" ;
+# export KAFKA_HOST="localhost:9092 ;"
+# export DB_CONNECTION="postgresql://postgres:postgres@localhost:5432/dsi_project" ;
+# '
+# todo
+
+# todo: checkout again
+# copy to clipboard 
+alias c='xclip'
+alias v='xclip -o'
+
+# ansible - wol
+alias woloff="docker run --rm --network host \
+        -v \"$HOME/home_lab/ansible\":/ansible \
+        -v \"$HOME/.ssh\":~/.ssh \
+        -w /ansible \
+        --entrypoint bash \
+        -it 311200/debug-tools:0.0.1-arm64 \
+        -c \"chown root /root/.ssh/*; ansible-playbook -i inventory.yaml power/power-off_nodes.yaml\""
+
+alias wolon="docker run --rm --network host \
+        -v \"$HOME/home_lab/ansible\":/ansible \
+        -v \"$HOME/.ssh\":/root/.ssh \
+        -w /ansible \
+        --entrypoint bash \
+        -it 311200/debug-tools:0.0.1-arm64 \
+        -c \"chown root /root/.ssh/*; ansible-playbook -i inventory.yaml power/power-on_nodes_jumphost.yaml\""
+
+alias ansible-playbook="ansible-playbook -i $HOME/home_lab/ansible/inventory.yaml"
+alias ansible="ansible -i $HOME/home_lab/ansible/inventory.yaml"
+
+### extras
+# enable proxy on startup
+# pidof -c cntlm > /dev/null || sudo service cntlm start
