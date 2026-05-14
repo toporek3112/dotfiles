@@ -119,4 +119,4 @@ bindkey -s '^kp' 'kctx -re "prod"'
 # other
 autoload zmv
 
-source $PWD/functions/.zshrc_functions
+source $HOME/dotfiles/zsh/functions/.zshrc_functions

@@ -37,7 +37,7 @@ hl.bind(vars.mainMod .. " + SHIFT + j", hl.dsp.window.move({ direction = "down" 
 hl.bind(vars.mainMod .. " + CTRL + h", hl.dsp.window.resize({ x = -50, y = 0, relative = true }))
 hl.bind(vars.mainMod .. " + CTRL + l", hl.dsp.window.resize({ x = 50, y = 0, relative = true }))
 hl.bind(vars.mainMod .. " + CTRL + k", hl.dsp.window.resize({ x = 0, y = -50, relative = true }))
-hl.bind(vars.mainMod .. " + CTRL + j", hl.dsp.window.resize({ x = 0, y = 5, relative = true }))
+hl.bind(vars.mainMod .. " + CTRL + j", hl.dsp.window.resize({ x = 0, y = 50, relative = true }))
 
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
@@ -54,8 +54,8 @@ hl.bind(vars.mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true }
 -- Move window silently (stay on current workspace)
 hl.bind("CTRL + ALT + right", hl.dsp.window.move({ workspace = "-1" }))
 hl.bind("CTRL + ALT + left", hl.dsp.window.move({ workspace = "+1" }))
-hl.bind(vars.mainMod .. " + CTRL + ALT + right", hl.dsp.window.move({ workspace = "-1" }))
-hl.bind(vars.mainMod .. " + CTRL + ALT + left", hl.dsp.window.move({ workspace = "+1" }))
+hl.bind(vars.mainMod .. " + CTRL + ALT + right", hl.dsp.window.move({ workspace = "-1", follow = true }))
+hl.bind(vars.mainMod .. " + CTRL + ALT + left", hl.dsp.window.move({ workspace = "+1", follow = true }))
 
 ----------------
 --- KEYBOARD ---
