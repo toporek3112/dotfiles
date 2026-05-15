@@ -6,16 +6,22 @@
 require("modules.layouts")
 require("modules.inputs")
 require("modules.keybindings")
-local vars = require("modules.vars")
+local apps = require("modules.vars").apps
 
 -------------------
 ---- AUTOSTART ----
 -------------------
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
-hl.on("hyprland.start", function () 
-  hl.exec_cmd(vars.terminal)
-  hl.exec_cmd("waybar & hyprshot & swaync & hyperpaper & firefox & spotify-launcher & obsidian")
+hl.on("hyprland.start", function ()
+  hl.exec_cmd(apps.terminal)
+  hl.exec_cmd("waybar")
+  hl.exec_cmd("hyprshot")
+  hl.exec_cmd("swaync")
+  hl.exec_cmd("hyprpaper")
+  hl.exec_cmd("firefox")
+  hl.exec_cmd("flatpak run com.spotify.Client")
+  hl.exec_cmd("obsidian")
 end)
 
 -------------------------------
@@ -47,25 +53,20 @@ hl.env("HYPRCURSOR_SIZE", "12")
 ---- LOOK AND FEEL ----
 -----------------------
 
--- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 3,
+        gaps_in  = 4,
         gaps_out = 10,
 
-        border_size = 3,
+        border_size = 2,
 
         col = {
-            active_border   = { colors = {"rgba(ff4444ee)", "rgba(cc2200ee)"}, angle = 45 },
-            inactive_border = "rgba(444444aa)",
+            active_border   = { colors = { "rgba(ff4c5bee)", "rgba(e03645ee)" }, angle = 45 },
+            inactive_border = "rgba(2a2b32aa)",
         },
 
-        -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = true,
-
-        -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
-
         layout = "dwindle",
     },
 
@@ -73,22 +74,21 @@ hl.config({
         rounding       = 10,
         rounding_power = 2,
 
-        -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 0.8,
+        inactive_opacity = 0.92,
 
         shadow = {
             enabled      = true,
-            range        = 4,
+            range        = 12,
             render_power = 3,
-            color        = 0xee1a1a1a,
+            color        = "rgba(00000055)",
         },
 
         blur = {
             enabled   = true,
-            size      = 3,
-            passes    = 1,
-            vibrancy  = 0.1696,
+            size      = 4,
+            passes    = 2,
+            vibrancy  = 0.12,
         },
     },
 
