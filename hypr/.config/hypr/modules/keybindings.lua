@@ -9,6 +9,7 @@ local restartHyperlandSession = hl.bind(vars.keys.mainMod .. " + M",
 --- APPLICATIONS ---
 --------------------
 
+hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd("kitty"))
 hl.bind(vars.keys.mainMod .. " + E", hl.dsp.exec_cmd(vars.apps.fileManager))
 hl.bind(vars.keys.mainMod .. " + SPACE", hl.dsp.exec_cmd(vars.apps.menu))
 hl.bind(vars.keys.mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
