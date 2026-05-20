@@ -21,20 +21,83 @@
 * {
     font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
+    
     min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
     border: none;
 }
 
 window#waybar {
-    background: alpha(@bg, 0.92);
+    background: alpha(@bg, 0.90);
     color: @fg;
     border-bottom: 1px solid alpha(@border, 0.6);
 }
-window#waybar.hidden {
-    opacity: 0.2;
+window#waybar.bottom-horizontal {
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    transition: all 500ms ease;
 }
 
-button {
+
+#workspaces {
+    border-radius: 20px;
+    background: alpha(@bg, 0.9);
+    transition: all 500ms ease;
+}
+#workspaces button {
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 5px;
+    color: @fg_muted;
+    background: transparent;
+    transition: all 500ms ease;
+}
+#workspaces button.focused,
+#workspaces button.active {
+    background: alpha(@red_deep, 0.3);
+    padding: 5px 30px;
+    transition: all 500ms ease;
+}
+#workspaces button:hover {
+    background: alpha(@red_deep, 0.5);
+    transition: all 0.3s ease;
+}
+#workspaces button.urgent {
+    background: @error;
+}
+#workspaces .taskbar-window {
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+#workspaces .taskbar-window.active {
+    background: alpha(@red_deep, 0.2);;
+    border: 1px solid alpha(@red_deep, 0.98);
+}
+
+/* #workspaces button.visible .taskbar-window,
+#workspaces button.visible .workspace-label {
+    border-color: rgb(255, 0, 0);
+} */
+
+/* #workspaces .taskbar-window image { 
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+/* button {
     box-shadow: none;
     text-shadow: none;
     transition: all 0.2s ease;
@@ -42,7 +105,7 @@ button {
 
 button:hover {
     background: inherit;
-}
+} */
 
 #workspaces,
 #window,
@@ -65,40 +128,14 @@ button:hover {
 #custom-media {
     background: @surface;
     color: @fg;
-    margin: 6px 4px;
-    padding: 4px 10px;
-    border: 1px solid alpha(@border, 0.85);
+    /* margin: 6px 4px;
+    padding: 4px 10px; */
+    /* border: 1px solid alpha(@border, 0.85); */
 }
 
-#workspaces {
-    padding: 5px;
-}
-#workspaces button {
-    padding: 0 10px;
-    margin: 0 2px;
-    color: @fg_muted;
-    background: transparent;
-    border-radius: 8px;
-}
-#workspaces button:hover {
-    background: alpha(@red_soft, 0.18);
-    color: @fg;
-}
-#workspaces button.focused,
-#workspaces button.active {
-    background: @red;
-    color: @fg;
-}
-#workspaces button.urgent {
-    background: @error;
-    color: @fg;
-}
 
-#window {
-    color: @fg_muted;
-    padding-left: 12px;
-    padding-right: 12px;
-}
+
+
 
 #clock {
     background: @red_deep;
@@ -156,21 +193,6 @@ button:hover {
     color: @fg_muted;
 }
 
-#battery {
-    color: @fg;
-}
-
-#battery.charging,
-#battery.plugged {
-    background: alpha(@ok, 0.18);
-    color: @ok;
-}
-
-#battery.critical:not(.charging) {
-    background: @error;
-    color: @fg;
-}
-
 #tray {
     padding-left: 8px;
     padding-right: 8px;
@@ -189,20 +211,6 @@ button:hover {
     color: @red_soft;
 }
 
-#power-profiles-daemon.performance {
-    background: alpha(@error, 0.18);
-    color: @error;
-}
-
-#power-profiles-daemon.balanced {
-    background: alpha(@rose, 0.18);
-    color: @rose_soft;
-}
-
-#power-profiles-daemon.power-saver {
-    background: alpha(@ok, 0.18);
-    color: @ok;
-}
 
 #mpd,
 #custom-media {
@@ -237,6 +245,11 @@ button:hover {
     color: @red_soft;
 }
 
+#language {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 20px;
+}
+
 /* Custom Power Module */
 #custom-power {
     background:  alpha(@surface, 0.80);
@@ -244,7 +257,7 @@ button:hover {
     font-weight: bold;
     border-radius: 30px;
     padding: 5px 0;
-    margin: 5px;
+    margin: 10px 20px 10px 10px;
 }
 #custom-power:hover {
     background: alpha(@red, 0.18);
