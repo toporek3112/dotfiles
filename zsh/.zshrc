@@ -60,13 +60,14 @@ alias clusters='l ~/.kube/clusters'
 
 # global aliases (zsh specific)
 alias -g NE="2>/dev/null"
+alias -g SO="2>&1"
 alias -g G="| grep"
 alias -g JQ=" | jq"
 alias -g YQ=" | yq"
 alias -g BATY=" | batcat -l yaml"
 alias -g BRANCH='$(git branch --show-current)'
 alias -g WCL='| wc -l'
-alias -g CL='|  wl-copy'
+alias -g C=' |  wl-copy'
 
 if command -v batcat >/dev/null 2>&1; then
   alias bat="batcat"
