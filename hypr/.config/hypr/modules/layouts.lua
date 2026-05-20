@@ -37,13 +37,13 @@ hl.monitor({
 
 local workspace = {
     { workspace = "1", monitor = monitors.bottom, persistent = true,  default = true },
-    { workspace = "2", monitor = monitors.top, persistent = true,  default = true },
-    { workspace = "3", monitor = monitors.right, persistent = true,  default = true },
-    { workspace = "4", monitor = monitors.bottom, persistent = true,  default = true},
+    { workspace = "2", monitor = monitors.bottom, persistent = true,  default = true },
+    { workspace = "3", monitor = monitors.bottom, persistent = true,  default = true },
+    { workspace = "4", monitor = monitors.top, persistent = true,  default = true},
     { workspace = "5", monitor = monitors.top, persistent = true, default = true},
-    { workspace = "6", monitor = monitors.right, persistent = true,  default = true },
-    { workspace = "7", monitor = monitors.bottom, persistent = true,  default = true },
-    { workspace = "8", monitor = monitors.top, persistent = true,  default = true },
+    { workspace = "6", monitor = monitors.top, persistent = true,  default = true },
+    { workspace = "7", monitor = monitors.right, persistent = true,  default = true },
+    { workspace = "8", monitor = monitors.right, persistent = true,  default = true },
     { workspace = "9", monitor = monitors.right, persistent = true,  default = true },
 }
 
@@ -55,6 +55,34 @@ end
 ------ WINDOWS ------
 --------------------
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
+
+-- window placing 
+hl.window_rule({
+    name  = "workspace-01",
+    match = {
+      class = "code-oss",
+    },
+    no_blur = true,
+    workspace = "1",
+})
+
+hl.window_rule({
+    name  = "workspace-04",
+    match = {
+      class = "obsidian",
+    },
+    no_blur = true,
+    workspace = "4",
+})
+
+hl.window_rule({
+    name  = "workspace-07",
+    match = {
+      class = "KeePass2",
+    },
+    no_blur = true,
+    workspace = "7",
+})
 
 -- Example window rules that are useful
 local suppressMaximizeRule = hl.window_rule({
