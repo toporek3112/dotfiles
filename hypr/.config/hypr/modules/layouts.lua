@@ -1,4 +1,4 @@
----------------------
+--------------------
 ------ MONITORS ------
 ---------------------
 
@@ -36,15 +36,15 @@ hl.monitor({
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
 local workspace = {
-    { workspace = "1", monitor = monitors.bottom, persistent = true,  default = true },
+    { workspace = "1", monitor = monitors.bottom, persistent = true,  default = true},
     { workspace = "2", monitor = monitors.bottom, persistent = true,  default = true },
     { workspace = "3", monitor = monitors.bottom, persistent = true,  default = true },
     { workspace = "4", monitor = monitors.top, persistent = true,  default = true},
     { workspace = "5", monitor = monitors.top, persistent = true, default = true},
     { workspace = "6", monitor = monitors.top, persistent = true,  default = true },
-    { workspace = "7", monitor = monitors.right, persistent = true,  default = true },
-    { workspace = "8", monitor = monitors.right, persistent = true,  default = true },
-    { workspace = "9", monitor = monitors.right, persistent = true,  default = true },
+    { workspace = "7", monitor = monitors.right, persistent = true,  default = true, layout = "scrolling", layout_opts = { direction = "down" } },
+    { workspace = "8", monitor = monitors.right, persistent = true,  default = true, layout = "scrolling", layout_opts = { direction = "down" } },
+    { workspace = "9", monitor = monitors.right, persistent = true,  default = true, layout = "scrolling", layout_opts = { direction = "down" } },
 }
 
 for _, ws in ipairs(workspace) do
@@ -58,6 +58,15 @@ end
 
 -- window placing 
 hl.window_rule({
+    name  = "always-float",
+    match = {
+      class = ".*(satty).*",
+    },
+    float = true
+})
+
+-- default workspaces for applications
+hl.window_rule({
     name  = "workspace-01",
     match = {
       class = "code-oss",
@@ -67,9 +76,19 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name  = "workspace-02",
+    match = {
+    --   class = "kitty",
+      initial_title = "Code %- OSS",
+    },
+    no_blur = true,
+    workspace = "2",
+})
+
+hl.window_rule({
     name  = "workspace-04",
     match = {
-      class = "obsidian",
+    --   class = "kitty",
     },
     no_blur = true,
     workspace = "4",
@@ -78,10 +97,29 @@ hl.window_rule({
 hl.window_rule({
     name  = "workspace-07",
     match = {
-      class = "KeePass2",
+      class = ".*(obsidian|kitty).*",
     },
     no_blur = true,
+    scrolling_width = 0.6,
     workspace = "7",
+})
+
+hl.window_rule({
+    name  = "workspace-08",
+    match = {
+      class = "(KeePass2|spotify|firefox)",
+    },
+    no_blur = true,
+    workspace = "8",
+})
+
+hl.window_rule({
+    name  = "workspace-09",
+    match = {
+      class = "firefox",
+    },
+    no_blur = true,
+    workspace = "9",
 })
 
 -- Example window rules that are useful

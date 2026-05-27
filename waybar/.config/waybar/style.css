@@ -21,7 +21,7 @@
 * {
     font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
-    
+
     min-height: 0;
     margin: 0;
     padding: 0;
@@ -29,12 +29,18 @@
     border: none;
 }
 
+/*************************/
+/********** BARS **********/
+/*************************/
 window#waybar {
     background: alpha(@bg, 0.90);
     color: @fg;
     border-bottom: 1px solid alpha(@border, 0.6);
 }
+
 window#waybar.bottom-horizontal {
+    margin: 0;
+    padding: 0;
     color: transparent;
     background-color: transparent;
     border: none;
@@ -42,38 +48,59 @@ window#waybar.bottom-horizontal {
 }
 
 
+/*******************************/
+/********** WORKSPACES **********/
+/*******************************/
 #workspaces {
     border-radius: 20px;
-    background: alpha(@bg, 0.9);
+    border: 1px solid alpha(@border, 0.85);
+    background: alpha(@bg, 0.90);
+    color: @fg;
     transition: all 500ms ease;
+    margin: 5px 0px;
+    padding: 5px;
 }
+
 #workspaces button {
     border-radius: 20px;
+    border: 1px solid alpha(@border, 0.85);
     padding: 5px 10px;
     margin: 5px;
     color: @fg_muted;
     background: transparent;
     transition: all 500ms ease;
 }
+
 #workspaces button.focused,
 #workspaces button.active {
     background: alpha(@red_deep, 0.3);
     padding: 5px 30px;
+    margin: 5px;
     transition: all 500ms ease;
 }
-#workspaces button:hover {
+
+/* #workspaces button:hover {
     background: alpha(@red_deep, 0.5);
     transition: all 0.3s ease;
-}
+} */
+
 #workspaces button.urgent {
     background: @error;
 }
+
 #workspaces .taskbar-window {
-    padding: 5px 10px;
+    padding: 0px 7px;
+    margin: 5px;
     border-radius: 20px;
 }
+
 #workspaces .taskbar-window.active {
-    background: alpha(@red_deep, 0.2);;
+    background: alpha(@red_deep, 0.2);
+    border: 1px solid alpha(@red_deep, 0.98);
+}
+
+#workspaces .taskbar-window:hover {
+    background: alpha(@red_deep, 0.2);
     border: 1px solid alpha(@red_deep, 0.98);
 }
 
@@ -86,30 +113,29 @@ window#waybar.bottom-horizontal {
 }
 */
 
+/**************************/
+/********** CLOCK **********/
+/**************************/
 
-
-
-
-
-
-
-
-
-
-
-/* button {
-    box-shadow: none;
-    text-shadow: none;
-    transition: all 0.2s ease;
+#clock {
+    color: @fg;
+    border-radius: 20px;
+    padding: 0;
+    margin: 0;
 }
 
-button:hover {
-    background: inherit;
-} */
+#clock:hover {
+    background: alpha(@red_deep, 0.3);
+    padding: 0 20px;
+    transition: all 500ms ease;
+}
 
-#workspaces,
+
+/***************************/
+/********** LEGACY **********/
+/***************************/
+
 #window,
-#clock,
 #battery,
 #cpu,
 #memory,
@@ -128,25 +154,15 @@ button:hover {
 #custom-media {
     background: @surface;
     color: @fg;
-    /* margin: 6px 4px;
-    padding: 4px 10px; */
-    /* border: 1px solid alpha(@border, 0.85); */
+    margin: 6px 4px;
+    padding: 4px 10px;
+    border: 1px solid alpha(@border, 0.85);
 }
 
 
-
-
-
-#clock {
-    background: @red_deep;
-    color: @fg;
-    font-weight: bold;
-    border-radius: 30px;
-}
 
 #pulseaudio:hover,
 #network:hover,
-#clock:hover,
 #cpu:hover,
 #memory:hover,
 #temperature:hover,
@@ -198,11 +214,11 @@ button:hover {
     padding-right: 8px;
 }
 
-#tray > .passive {
+#tray>.passive {
     -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
     background: @error;
 }
 
@@ -252,28 +268,32 @@ button:hover {
 
 /* Custom Power Module */
 #custom-power {
-    background:  alpha(@surface, 0.80);
+    background: alpha(@surface, 0.80);
     color: @fg;
     font-weight: bold;
     border-radius: 30px;
     padding: 5px 0;
     margin: 10px 20px 10px 10px;
 }
+
 #custom-power:hover {
     background: alpha(@red, 0.18);
     color: @red;
     transition: all 0.5s ease;
 }
+
 menu {
     border-color: transparent;
-	background: alpha(@bg, 0.80);
+    background: alpha(@bg, 0.80);
     padding: 0;
     margin: 0;
 }
+
 menuitem {
     border-radius: 5px;
     color: @red;
 }
+
 menuitem:hover {
     transition: all 0.3s ease;
     background: alpha(@red, 0.5);
