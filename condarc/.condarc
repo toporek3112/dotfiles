@@ -1,0 +1,7 @@
+# conda install -n base conda-libmamba-solver -y
+solver: rattler
+channel_priority: flexible
+channels:
+  - conda-forge
+  - defaults
+  - conda-pypi
