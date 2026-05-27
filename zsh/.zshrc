@@ -122,3 +122,19 @@ bindkey -s '^kp' 'kctx -re "prod"'
 autoload zmv
 
 source $HOME/dotfiles/zsh/functions/.zshrc_functions
+
+# zsh 
+# for all options see ~/.oh-my-zsh/templates/zshrc.zsh-template
+export ZSH="$HOME/.oh-my-zsh"
+export ARCHFLAGS="-arch $(uname -m)"
+
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# fzf 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
