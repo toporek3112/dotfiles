@@ -43,6 +43,8 @@ window#waybar.bottom-horizontal {
     padding: 0;
     color: transparent;
     background-color: transparent;
+    /* color: red;
+    background-color: red; */
     border: none;
     transition: all 500ms ease;
 }
@@ -57,14 +59,14 @@ window#waybar.bottom-horizontal {
     background: alpha(@bg, 0.90);
     color: @fg;
     transition: all 500ms ease;
-    margin: 5px 0px;
+    margin-bottom: 5px;
     padding: 5px;
 }
 
 #workspaces button {
     border-radius: 20px;
     border: 1px solid alpha(@border, 0.85);
-    padding: 5px 10px;
+    padding: 10px 10px;
     margin: 5px;
     color: @fg_muted;
     background: transparent;
@@ -74,7 +76,7 @@ window#waybar.bottom-horizontal {
 #workspaces button.focused,
 #workspaces button.active {
     background: alpha(@red_deep, 0.3);
-    padding: 5px 30px;
+    padding: 10px 30px;
     margin: 5px;
     transition: all 500ms ease;
 }
