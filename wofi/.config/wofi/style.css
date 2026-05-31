@@ -1,0 +1,89 @@
+@define-color bg #0f1014;
+@define-color bg_alt #181a20;
+@define-color fg #f9f5f7;
+@define-color fg_muted #c8bfc4;
+@define-color red #ff4c5b;
+@define-color red_soft #ff6b7a;
+@define-color red_deep #e03645;
+@define-color rose #f0869a;
+@define-color rose_soft #f5a0b3;
+@define-color border #2a2b32;
+@define-color border_soft #202129;
+@define-color surface #15161c;
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window {
+    margin: 0px;
+    border: 1px solid alpha(@border, 0.85);
+    border-radius: 16px;
+    background-color: alpha(@bg, 0.95);
+    color: @fg;
+}
+
+#input {
+    margin: 12px 12px 8px 12px;
+    padding: 8px 12px;
+    border: 1px solid alpha(@border, 0.85);
+    border-radius: 10px;
+    color: @fg;
+    background-color: @bg_alt;
+}
+
+#inner-box {
+    margin: 8px;
+    border: none;
+    background-color: transparent;
+}
+
+#outer-box {
+    margin: 8px;
+    border: none;
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0px;
+    border: none;
+}
+
+#text {
+    margin: 6px;
+    border: none;
+    color: @fg_muted;
+}
+
+#entry {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+#entry.activatable #text {
+    color: @fg;
+}
+
+#entry > * {
+    color: @fg_muted;
+}
+
+#entry:selected {
+    background-color: alpha(@red_deep, 0.3);
+    border: 1px solid alpha(@red_deep, 0.5);
+}
+
+#entry:selected #text {
+    color: @fg;
+    font-weight: bold;
+}
+
+#entry:hover {
+    background-color: alpha(@red_deep, 0.15);
+}
+
+#entry:hover #text {
+    color: @fg;
+}

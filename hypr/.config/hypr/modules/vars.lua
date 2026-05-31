@@ -5,7 +5,7 @@ local vars = {
     apps = {
         terminal    = "kitty",
         fileManager = "nautilus",
-        menu        = "wofi --show run",
+        menu        = "wofi --show run --style ~/.config/wofi/style.css",
     },
     monitors = {
         top    = "desc:Samsung Electric Company C27FG70 HTHJ400809",
@@ -25,5 +25,12 @@ local vars = {
         [10] = "KP_Insert",
     }
 }
+
+-------------------------------
+---- ENVIRONMENT VARIABLES ----
+-------------------------------
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+hl.env("XCURSOR_SIZE", "10")
+hl.env("HYPRCURSOR_SIZE", "10")
 
 return vars

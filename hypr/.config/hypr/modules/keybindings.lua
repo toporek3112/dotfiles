@@ -64,6 +64,7 @@ hl.bind(vars.keys.mainMod .. " + CTRL + RIGHT", hl.dsp.window.resize({ x = 50, y
 hl.bind(vars.keys.mainMod .. " + CTRL + UP", hl.dsp.window.resize({ x = 0, y = -50, relative = true }))
 hl.bind(vars.keys.mainMod .. " + CTRL + DOWN", hl.dsp.window.resize({ x = 0, y = 50, relative = true }))
 
+-- Focus and Move with Numpad 
 for i = 1, 10 do
     local key = i % 10 -- still for the main number row
 
@@ -89,14 +90,15 @@ end
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(vars.keys.mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(vars.keys.mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+-- Scroll through existing workspaces with mainMod + scroll
+hl.bind(vars.keys.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(vars.keys.mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+-- logitech mouse side buttons 
+hl.bind(vars.keys.mainMod .. " + mouse:275", hl.dsp.focus({ workspace = "e-1" })) -- back
+hl.bind(vars.keys.mainMod .. " + mouse:276", hl.dsp.focus({ workspace = "e+1" })) -- forward
 
--- Move window silently (stay on current workspace)
--- hl.bind("CTRL + ALT + up", hl.dsp.window.move({ direction = "up" }))
--- hl.bind("CTRL + ALT + down", hl.dsp.window.move({ direction = "down" }))
--- hl.bind("CTRL + ALT + right", hl.dsp.window.move({ direction = "right" }))
--- hl.bind("CTRL + ALT + left", hl.dsp.window.move({ direction = "left" }))
--- hl.bind(vars.keys.mainMod .. " + CTRL + ALT + right", hl.dsp.window.move({ workspace = "+1", follow = true }))
--- hl.bind(vars.keys.mainMod .. " + CTRL + ALT + left", hl.dsp.window.move({ workspace = "-1", follow = true }))
+-- Special workspaces
+hl.bind(vars.keys.mainMod .. " + ALT + " .. vars.keypad[1], hl.dsp.workspace.toggle_special("spotify"))
 
 -- debug
 -- hl.bind(vars.keys.mainMod .. " + ALT + M", function()
@@ -130,10 +132,3 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- Example special workspace (scratchpad)
 -- hl.bind(vars.keys.mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
 -- hl.bind(vars.keys.mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
--- Scroll through existing workspaces with mainMod + scroll
--- hl.bind(vars.keys.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
--- hl.bind(vars.keys.mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
-
--- logitech mouse side buttons 
--- hl.bind(vars.keys.mainMod .. " + mouse:275", hl.dsp.focus({ workspace = "e-1" })) -- back
--- hl.bind(vars.keys.mainMod .. " + mouse:276", hl.dsp.focus({ workspace = "e+1" })) -- forward
