@@ -137,4 +137,6 @@ source $ZSH/oh-my-zsh.sh
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # fzf 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
+	source /usr/share/fzf/key-bindings.zsh
+fi
