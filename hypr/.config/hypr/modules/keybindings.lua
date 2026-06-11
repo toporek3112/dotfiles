@@ -98,7 +98,8 @@ hl.bind(vars.keys.mainMod .. " + mouse:275", hl.dsp.focus({ workspace = "e-1" })
 hl.bind(vars.keys.mainMod .. " + mouse:276", hl.dsp.focus({ workspace = "e+1" })) -- forward
 
 -- Special workspaces
-hl.bind(vars.keys.mainMod .. " + ALT + " .. vars.keypad[1], hl.dsp.workspace.toggle_special("spotify"))
+hl.bind(vars.keys.mainMod .. " + ALT + X", hl.dsp.workspace.toggle_special("spotify"))
+hl.bind(vars.keys.mainMod .. " + ALT + Y", hl.dsp.workspace.toggle_special("terminal"))
 
 -- debug
 -- hl.bind(vars.keys.mainMod .. " + ALT + M", function()

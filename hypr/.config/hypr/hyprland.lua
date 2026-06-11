@@ -14,7 +14,6 @@ local apps = require("modules.vars").apps
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function()
-    hl.exec_cmd(apps.terminal)
     hl.exec_cmd("waybar")
     hl.exec_cmd("hyprshot")
     hl.exec_cmd("swaync")
@@ -22,18 +21,19 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("firefox")
     hl.exec_cmd("flatpak run com.spotify.Client")
     hl.exec_cmd("obsidian")
+    hl.exec_cmd("pkill code; pkill code-oss ;code") -- because apparently sometimes there is already an instance running
+    hl.exec_cmd("~/.config/hypr/scripts/place_windows.sh")
 end)
-
 
 -----------------------
 ----- PERMISSIONS -----
 -----------------------
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
 
-hl.config({ ecosystem = { enforce_permissions = true } })
+-- hl.config({ ecosystem = { enforce_permissions = true } })
 -- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
 -- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
-hl.permission("/usr/bin/hyprshot", "screencopy", "allow")
+-- hl.permission("/usr/bin/hyprshot", "screencopy", "allow")
 
 -----------------------
 ---- LOOK AND FEEL ----

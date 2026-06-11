@@ -25,7 +25,7 @@ hl.monitor({
 hl.monitor({
     output    = monitors.right,
     mode      = "1920x1080@60",
-    position  = "1920x0",
+    position  = "1920x120",
     scale     = 1,
     transform = 3,
 })
@@ -38,6 +38,7 @@ hl.monitor({
 local workspaces = {
     -- special workspaces
     { workspace = "special:spotify", monitor = monitors.right,  default = true, on_created_empty = "flatpak run com.spotify.Client"},
+    { workspace = "special:terminal", monitor = monitors.right,  default = true, on_created_empty = "kitty"},
     -- normal workspaces
     { workspace = "1", monitor = monitors.bottom, persistent = true,  default = true},
     { workspace = "2", monitor = monitors.bottom, persistent = true,  default = true },
@@ -64,14 +65,18 @@ end
 local windows = {
     -- window placing 
     { name  = "always-float", match = { class = ".*(satty).*" }, float = true },
+    
     -- default special workspaces for applications
     {name  = "spotify", match = { class = "(spotify)" }, workspace = "special:spotify"},
+    {name  = "terminal", match = { }, workspace = "special:terminal"},
+    
     -- default normal workspaces for applications
     { name  = "workspace-01", match = { class = "code-oss"}, no_blur = true, workspace = "1" },
-    { name  = "workspace-02",match = { initial_title = "Code %- OSS" }, no_blur = true, workspace = "2" },
+    { name  = "workspace-02",match = { }, no_blur = true, workspace = "2" },
     { name  = "workspace-04", match = { }, no_blur = true, workspace = "4" },
-    { name  = "workspace-07", match = { class = ".*(obsidian|kitty|KeePass2).*" }, no_blur = true, scrolling_width = 0.6, workspace = "7" },
+    { name  = "workspace-07", match = { class = "(obsidian|KeePass2)" }, no_blur = true, workspace = "7", },
     { name  = "workspace-09", match = { class = "firefox" }, no_blur = true, workspace = "9", },
+    
     ---- Example window rules that are useful
     -- Ignore maximize requests from all apps. You'll probably like this.
     { name  = "suppress-maximize-events", match = { class = ".*" }, suppress_event = "maximize",},
