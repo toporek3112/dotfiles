@@ -8,9 +8,9 @@ kctx() {
   local re_filter=""
   local all_flag=false
   local file_flag=""
+  local search_dir="$HOME/.kube"
   local args=()
 
-  # Parse flags
   while [[ $# -gt 0 ]]; do
     case "$1" in
       -re)
@@ -24,6 +24,10 @@ kctx() {
         shift
         file_flag="$1"
         ;;
+      --dir|-d)
+        shift
+        search_dir="$1"
+        ;;
       *)
         args+=("$1")
         ;;
@@ -31,57 +35,74 @@ kctx() {
     shift
   done
 
-  local clusters=($HOME/.kube/clusters/*)
-  if [[ -n "$re_filter" ]]; then
-    clusters=($(printf "%s\n" "${clusters[@]}" | grep -E "$re_filter"))
+  if [[ ! -d "$search_dir" ]]; then
+    echo "Error: Directory '$search_dir' not found." >&2
+    return 1
   fi
 
-  # Filter by file if provided
+  local clusters=()
+  local cluster_path
+
+  for cluster_path in "$search_dir"/*; do
+    [[ -f "$cluster_path" ]] && clusters+=("$cluster_path")
+  done
+
+  if [[ -n "$re_filter" ]]; then
+    clusters=("${(@f)$(printf "%s\n" "${clusters[@]}" | grep -E "$re_filter")}")
+  fi
+
   if [[ -n "$file_flag" ]]; then
     if [[ ! -f "$file_flag" ]]; then
       echo "Error: File '$file_flag' not found." >&2
       return 1
     fi
-    
-    # Create associative array for O(1) lookups
+
     local -A file_cluster_names
+
     while IFS= read -r line; do
       line="${line##[[:space:]]}"
       line="${line%%[[:space:]]}"
       [[ -z "$line" || "$line" == \#* ]] && continue
       file_cluster_names[$line]=1
     done < "$file_flag"
-    
+
     if [[ ${#file_cluster_names[@]} -eq 0 ]]; then
       echo "Error: No cluster names found in file '$file_flag'." >&2
       return 1
     fi
-    
+
     local matched_clusters=()
+
     for cluster_path in "${clusters[@]}"; do
-      local cluster_name=$(basename "$cluster_path")
+      local cluster_name
+      cluster_name=$(basename "$cluster_path")
       [[ -n "${file_cluster_names[$cluster_name]}" ]] && matched_clusters+=("$cluster_path")
     done
-    
+
     if [[ ${#matched_clusters[@]} -eq 0 ]]; then
       echo "Error: No matching clusters found for names in file '$file_flag'." >&2
       return 1
     fi
-    
+
     clusters=("${matched_clusters[@]}")
   fi
 
   if [[ ${#clusters[@]} -eq 0 ]]; then
-    echo "No matching clusters found." >&2
+    echo "No matching kubeconfig files found in '$search_dir'." >&2
     return 1
   fi
 
   if [[ ${#args[@]} -eq 0 && "$all_flag" = false ]]; then
-    local selected_cluster=$(printf "%s\n" "${clusters[@]}" | fzf)
+    local selected_cluster
+    selected_cluster=$(printf "%s\n" "${clusters[@]}" | fzf --preview="cat {}")
+
     [[ -z "$selected_cluster" ]] && echo "No cluster selected." && return 1
 
-    export KUBECONFIG=$(realpath "$selected_cluster")
-    local cluster_name=$(basename "$KUBECONFIG")
+    export KUBECONFIG
+    KUBECONFIG=$(realpath "$selected_cluster")
+
+    local cluster_name
+    cluster_name=$(basename "$KUBECONFIG")
 
     local color=$NC
     [[ "$cluster_name" == *-dev* ]] && color=$GREEN
@@ -91,17 +112,22 @@ kctx() {
     echo -e "Switched KUBECONFIG to cluster: ${color}\033[1m${(U)cluster_name}\033[0m${NC}"
   else
     local user_cmd=("${args[@]}")
-    local selected_clusters
+    local selected_clusters=()
 
     if [[ "$all_flag" = true ]]; then
       selected_clusters=("${clusters[@]}")
     else
-      selected_clusters=($(printf "%s\n" "${clusters[@]}" | fzf --multi --preview="cat {}"))
-      [[ -z "$selected_clusters" ]] && echo "No clusters selected." && return 1
+      selected_clusters=("${(@f)$(printf "%s\n" "${clusters[@]}" | fzf --multi --preview="cat {}")}")
+
+      [[ ${#selected_clusters[@]} -eq 0 ]] && echo "No clusters selected." && return 1
     fi
 
+    local config
+
     for config in "${selected_clusters[@]}"; do
-      local cluster_name=$(basename "$config")
+      local cluster_name
+      cluster_name=$(basename "$config")
+
       local color=$BLUE
       [[ "$cluster_name" == *-dev* ]] && color=$GREEN
       [[ "$cluster_name" == *-nonprod* ]] && color=$ORANGE
@@ -110,7 +136,9 @@ kctx() {
       echo -e "Executing on cluster: ${color}\033[1m${cluster_name}\033[0m${NC}"
 
       KUBECONFIG=$(realpath "$config") eval "${user_cmd[*]}"
+
       [[ $? -ne 0 ]] && echo -e "${RED}Command failed or timed out on ${cluster_name}${NC}\n"
+
       echo ""
     done
   fi
