@@ -59,6 +59,7 @@ alias watch_prometheus="k -n monitoring get prometheus -w"
 alias clusters='l ~/.kube/clusters'
 
 # other
+alias cls="clear"
 alias aconda="eval $(/usr/local/bin/miniconda3/miniconda3/bin/conda shell.zsh activate)"
 
 # global aliases (zsh specific)
