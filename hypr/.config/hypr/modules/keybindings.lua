@@ -16,7 +16,7 @@ hl.bind("CTRL + ALT + " .. vars.keypad[3] , hl.dsp.dpms({ action = "toggle", mon
 hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd("kitty"))
 hl.bind(vars.keys.mainMod .. "+ ALT + R", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(vars.keys.mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(vars.keys.mainMod .. " + E", hl.dsp.exec_cmd(vars.apps.fileManager))
+hl.bind(vars.keys.mainMod .. " + E", hl.dsp.exec_cmd(vars.apps.fileManager .. " --new-window"))
 hl.bind(vars.keys.mainMod .. " + SPACE", hl.dsp.exec_cmd(vars.apps.menu))
 hl.bind(vars.keys.mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(vars.keys.mainMod .. " + D", hl.dsp.window.close())
@@ -98,8 +98,8 @@ hl.bind(vars.keys.mainMod .. " + mouse:275", hl.dsp.focus({ workspace = "e-1" })
 hl.bind(vars.keys.mainMod .. " + mouse:276", hl.dsp.focus({ workspace = "e+1" })) -- forward
 
 -- Special workspaces
-hl.bind(vars.keys.mainMod .. " + ALT + X", hl.dsp.workspace.toggle_special("spotify"))
-hl.bind(vars.keys.mainMod .. " + ALT + Y", hl.dsp.workspace.toggle_special("terminal"))
+hl.bind(vars.keys.mainMod .. " + ALT + Y", hl.dsp.workspace.toggle_special("spotify"))
+hl.bind(vars.keys.mainMod .. " + ALT + X", hl.dsp.workspace.toggle_special("terminal"))
 
 -- debug
 -- hl.bind(vars.keys.mainMod .. " + ALT + M", function()

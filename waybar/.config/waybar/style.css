@@ -54,19 +54,19 @@ window#waybar.bottom-horizontal {
 /********** WORKSPACES **********/
 /*******************************/
 #workspaces {
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
     border: 1px solid alpha(@border, 0.85);
     background: alpha(@bg, 0.90);
     color: @fg;
     transition: all 500ms ease;
-    margin-bottom: 5px;
-    padding: 5px;
+    margin-bottom: 0px;
+    padding: 0px;
 }
 
 #workspaces button {
     border-radius: 20px;
     border: 1px solid alpha(@border, 0.85);
-    padding: 10px 10px;
+    padding: 2px 5px;
     margin: 5px;
     color: @fg_muted;
     background: transparent;
@@ -76,8 +76,8 @@ window#waybar.bottom-horizontal {
 #workspaces button.focused,
 #workspaces button.active {
     background: alpha(@red_deep, 0.3);
-    padding: 10px 30px;
-    margin: 5px;
+    /* padding: 10px;
+    margin: 5px; */
     transition: all 500ms ease;
 }
 
@@ -91,7 +91,7 @@ window#waybar.bottom-horizontal {
 }
 
 #workspaces .taskbar-window {
-    padding: 0px 7px;
+    padding: 2px 5px;
     margin: 5px;
     border-radius: 20px;
 }
