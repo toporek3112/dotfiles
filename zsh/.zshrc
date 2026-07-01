@@ -1,4 +1,19 @@
 #############################################
+################ OH MY ZSH ##################
+#############################################
+# for all options see ~/.oh-my-zsh/templates/zshrc.zsh-template
+export ZSH="$HOME/.oh-my-zsh"
+export ARCHFLAGS="-arch $(uname -m)"
+
+zstyle ':omz:update' mode reminder # just remind me to update when it's time
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+
+source $ZSH/oh-my-zsh.sh
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+#############################################
 ################## HISTORY ##################
 #############################################
 setopt EXTENDED_HISTORY       # Write the history file in the ':start:elapsed;command' format.
@@ -94,7 +109,9 @@ openpipe() {
 }
 alias -g OPEN='| openpipe'
 
-# keybindings
+#############################################
+################ KEYBINDINGS ################
+#############################################
 bindkey -s '^Gl' 'git log'
 bindkey -s '^Gs' 'git status'
 bindkey -s '^Ga' 'git add .'
@@ -121,25 +138,35 @@ bindkey -s '^kd' 'kctx -re "dev"'
 bindkey -s '^kn' 'kctx -re "nonprod"'
 bindkey -s '^kp' 'kctx -re "prod"'
 
-# other
+#############################################
+################## OTHER ####################
+#############################################
 autoload zmv
 
 source $HOME/dotfiles/zsh/functions/.zshrc_functions
-
-# zsh
-# for all options see ~/.oh-my-zsh/templates/zshrc.zsh-template
-export ZSH="$HOME/.oh-my-zsh"
-export ARCHFLAGS="-arch $(uname -m)"
-
-zstyle ':omz:update' mode reminder # just remind me to update when it's timeyxyx
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
-
-source $ZSH/oh-my-zsh.sh
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # fzf
 if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
 	source /usr/share/fzf/key-bindings.zsh
 fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/local/bin/miniconda3/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/local/bin/miniconda3/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/toporek3112/.lmstudio/bin"
+# End of LM Studio CLI section
+
