@@ -93,6 +93,9 @@ hl.bind(vars.keys.mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = t
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(vars.keys.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(vars.keys.mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+-- Move focused window to next/previous workspace with mainMod + scroll
+hl.bind(vars.keys.mainMod .. " + SHIFT + mouse_down", hl.dsp.window.move({ workspace = "e+1" }))
+hl.bind(vars.keys.mainMod .. " + SHIFT + mouse_up", hl.dsp.window.move({ workspace = "e-1" }))
 -- logitech mouse side buttons 
 hl.bind(vars.keys.mainMod .. " + mouse:275", hl.dsp.focus({ workspace = "e-1" })) -- back
 hl.bind(vars.keys.mainMod .. " + mouse:276", hl.dsp.focus({ workspace = "e+1" })) -- forward
