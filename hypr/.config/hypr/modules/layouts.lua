@@ -67,26 +67,25 @@ local windows = {
     { name  = "always-float", match = { class = ".*(satty).*" }, float = true },
     
     -- default special workspaces for applications
-    {name  = "spotify", match = { class = "(spotify)" }, workspace = "special:spotify"},
+    {name  = "spotify", match = { class = ".*(spotify).*" }, workspace = "special:spotify"},
     {name  = "terminal", match = { }, workspace = "special:terminal"},
     
     -- default normal workspaces for applications
     { name  = "workspace-01", match = { class = "code-oss"}, no_blur = true, workspace = "1" },
     { name  = "workspace-02",match = { }, no_blur = true, workspace = "2" },
     { name  = "workspace-04", match = { }, no_blur = true, workspace = "4" },
-    { name  = "workspace-07", match = { class = "(obsidian|KeePass2)" }, no_blur = true, workspace = "7", },
+    { name  = "workspace-07", match = { class = ".*(Obsidian|KeePass2).*" }, no_blur = true, workspace = "7", },
     { name  = "workspace-09", match = { class = "firefox" }, no_blur = true, workspace = "9", },
     
     ---- Example window rules that are useful
     -- Ignore maximize requests from all apps. You'll probably like this.
     { name  = "suppress-maximize-events", match = { class = ".*" }, suppress_event = "maximize",},
     -- Fix some dragging issues with XWayland
-    { name  = "fix-xwayland-drags", match = { class      = "^$", title      = "^$", xwayland   = true, float      = true, fullscreen = false, pin = false }, no_focus = true,
+    { name  = "fix-xwayland-drags", match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false }, no_focus = true,}
     -- Layer rules also return a handle.
     -- https://wiki.hypr.land/Configuring/Basics/Window-Rules/#layer-rules
     -- local overlayLayerRule = hl.layer_rule({ name  = "no-anim-overlay", match = { namespace = "^my-overlay$" }, no_anim = true, })
     -- overlayLayerRule:set_enabled(false)
-}
 }
 
 for _, window in ipairs(windows) do
