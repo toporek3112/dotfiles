@@ -145,28 +145,29 @@ autoload zmv
 
 source $HOME/dotfiles/zsh/functions/.zshrc_functions
 
-# fzf
 if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
 	source /usr/share/fzf/key-bindings.zsh
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/local/bin/miniconda3/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/usr/local/bin/miniconda3/miniconda3/bin:$PATH"
-    fi
+if [[ -x "$HOME/.lmstudio/bin/lms" ]]; then
+	export PATH="$PATH:/home/toporek3112/.lmstudio/bin"
+fi 
+
+if [[ -x "$HOME/.platformio/penv/bin/pio" ]]; then
+  export PATH="$PATH:$HOME/.platformio/penv/bin"
 fi
-unset __conda_setup
+
+# >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/usr/local/bin/miniconda3/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/usr/local/bin/miniconda3/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
-
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/toporek3112/.lmstudio/bin"
-# End of LM Studio CLI section
-
