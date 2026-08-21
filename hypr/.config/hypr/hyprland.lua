@@ -22,7 +22,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("flatpak run com.spotify.Client")
     hl.exec_cmd("obsidian")
     hl.exec_cmd("pkill code; pkill code-oss ;code") -- because apparently sometimes there is already an instance running
-    hl.exec_cmd("~/.config/hypr/scripts/place_windows.sh")
+    hl.exec_cmd("sleep 10; ~/.config/hypr/scripts/place_windows.sh")
 end)
 
 -----------------------
