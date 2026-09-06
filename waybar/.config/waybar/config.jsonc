@@ -4,10 +4,7 @@
         "name": "top-horizontal",
         "layer": "top",
         "position": "top",
-        "output": [
-            "Samsung Electric Company C27FG70 HTHJ400809",
-            "Samsung Electric Company C27FG70 HTHJ301585"
-        ],
+        "output": ["Samsung Electric Company C27FG70 HTHJ400809"],
         "height": 42,
         "width": "auto",
         "spacing": 3,
@@ -15,7 +12,7 @@
         "reload_style_on_change ": true,
         "include": "~/dotfiles/waybar/.config/waybar/modules.jsonc",
         "modules-left": [
-            "custom/media",
+            "hyprland/workspaces",
         ],
         "modules-center": [
             // "hyprland/window"
@@ -36,11 +33,7 @@
         "name": "bottom-horizontal",
         "layer": "bottom",
         "position": "bottom",
-        "output": [
-            "Samsung Electric Company C27FG70 HTHJ400809",
-            "Samsung Electric Company C27FG70 HTHJ301585",
-            "Samsung Electric Company SAMSUNG 0x01000E00"
-        ],
+        "output": ["Samsung Electric Company C27FG70 HTHJ301585"],
         "height": "auto",
         "width": "auto",
         "spacing": 3,
@@ -48,27 +41,20 @@
         "expand-center": true,
         "reload_style_on_change ": true,
         "include": "~/dotfiles/waybar/.config/waybar/modules.jsonc",
-        "modules-center": [
-            "hyprland/workspaces#bottom"
-        ],
+        "modules-center": [],
         "modules-right": []
+    },
+    {
+        "name": "right-vertical",
+        "layer": "top",
+        "position": "right",
+        "output": ["Samsung Electric Company SAMSUNG 0x01000E00"],
+        "height": "auto",
+        "width": "auto",
+        "spacing": 3,
+        "expand-center": true,
+        "reload_style_on_change ": true,
+        "include": "~/dotfiles/waybar/.config/waybar/modules.jsonc",
+        "modules-bottom": []
     }
-    // {
-    //     "name": "right-vertical",
-    //     "layer": "top",
-    //     "position": "right",
-    //     "output": [
-    //         "Samsung Electric Company SAMSUNG 0x01000E00"
-    //     ],
-    //     "height": "auto",
-    //     "width": 80,
-    //     "spacing": 3,
-    //     "expand-center": true,
-    //     "reload_style_on_change ": true,
-    //     "include": "~/dotfiles/waybar/.config/waybar/modules.jsonc",
-    //     "modules-right": [
-    //         "hyprland/language",
-    //         "custom/power"
-    //     ]
-    // }
 ]

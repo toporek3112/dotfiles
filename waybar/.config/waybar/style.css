@@ -55,8 +55,8 @@ window#waybar.bottom-horizontal {
 /*******************************/
 #workspaces {
     border-radius: 20px 20px 0 0;
-    border: 1px solid alpha(@border, 0.85);
-    background: alpha(@bg, 0.90);
+    /* border: 1px solid alpha(@border, 0.85); */
+    /* background: alpha(@bg, 0.90); */
     color: @fg;
     transition: all 500ms ease;
     margin-bottom: 0px;
@@ -65,7 +65,7 @@ window#waybar.bottom-horizontal {
 
 #workspaces button {
     border-radius: 20px;
-    border: 1px solid alpha(@border, 0.85);
+    border: 2px solid alpha(@border, 1);
     padding: 2px 5px 2px 15px;
     margin: 5px;
     color: @fg_muted;
@@ -156,9 +156,10 @@ window#waybar.bottom-horizontal {
 #custom-media {
     background: @surface;
     color: @fg;
-    margin: 6px 4px;
-    padding: 4px 10px;
+    margin: 4px;
+    padding: 1px 10px;
     border: 1px solid alpha(@border, 0.85);
+    border-radius: 20px;
 }
 
 
@@ -171,7 +172,7 @@ window#waybar.bottom-horizontal {
 #battery:hover,
 #idle_inhibitor:hover,
 #power-profiles-daemon:hover {
-    background: @bg_alt;
+    background: alpha(@red_deep, 0.3);
     transition: all 0.3s ease;
 }
 

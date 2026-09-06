@@ -1,46 +1,22 @@
 {
     "hyprland/workspaces": {
         "active-only": false,
-        "on-click": "activate",
         "move-to-monitor": true,
-        "disable-scroll": true,
         "all-outputs": true,
-        "warp-on-scroll": false,
-        "format": "{name}: {icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "6": "",
-            "urgent": "",
-            "active": "",
-            "default": ""
-        },
+        "format": "{icon} {windows}",
         "workspace-taskbar": {
             "enable": true,
             "update-active-window": true,
-            "format": "{icon} {title:.20}",
-            "icon-size": 16
+            "format": "{icon}",
+            "icon-size": 16,
+            "on-click-window": "~/dotfiles/waybar/.config/waybar/scripts/focus-window.sh {address} {button}"
         }
     },
-    "hyprland/workspaces#vertical": {
+    "hyprland/workspaces#left": {
         "rotate": 90,
         "active-only": false,
-        "on-click": "activate",
-        "move-to-monitor": true,
-        "disable-scroll": true,
-        "all-outputs": true,
-        "warp-on-scroll": false,
         "format": "{name}: {icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "6": "",
-            "urgent": "",
-            "active": "",
-            "default": ""
-        },
+        "move-to-monitor": true,
         "workspace-taskbar": {
             "enable": true,
             "update-active-window": true,
@@ -49,9 +25,9 @@
         }
     },
     "hyprland/workspaces#bottom": {
+        "active-only": false,
         "format": "{icon} {windows}",
         "format-window-separator": "",
-        "active-only": false,
         "move-to-monitor": true,
         "workspace-taskbar": {
             "enable": true,
@@ -151,7 +127,7 @@
     //     "interval": 1
     // },
     "clock": {
-        "format": "{:%H:%M:%S | %d.%m.%Y}",
+        "format": "{:%H:%M:%S}",
         "interval": 1,
         "format-alt": "{:%H:%M:%S | %d.%m.%Y | %A}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
