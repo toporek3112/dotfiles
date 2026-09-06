@@ -149,6 +149,7 @@ if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
 	source /usr/share/fzf/key-bindings.zsh
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
 if [[ -x "$HOME/.lmstudio/bin/lms" ]]; then
 	export PATH="$PATH:/home/toporek3112/.lmstudio/bin"
 fi 
