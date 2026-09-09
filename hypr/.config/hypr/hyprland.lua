@@ -41,39 +41,39 @@ end)
 
 hl.config({
     general = {
-        gaps_in          = 4,
-        gaps_out         = 5,
+		gaps_in = 4,
+		gaps_out = 5,
 
-        border_size      = 2,
+		border_size = 2,
 
-        col              = {
-            active_border   = { colors = { "rgba(ff4c5bee)", "rgba(e03645ee)" }, angle = 45 },
+		col = {
+			active_border = { colors = { "rgba(ff4c5bee)", "rgba(e03645ee)" }, angle = 45 },
             inactive_border = "rgba(2a2b32aa)",
         },
 
         resize_on_border = true,
-        allow_tearing    = false,
-        layout           = "dwindle",
+		allow_tearing = false,
+		layout = "dwindle",
     },
 
     decoration = {
-        rounding         = 10,
-        rounding_power   = 2,
+		rounding = 10,
+		rounding_power = 2,
 
-        active_opacity   = 1.0,
+		active_opacity = 1.0,
         inactive_opacity = 0.92,
 
-        shadow           = {
-            enabled      = true,
-            range        = 12,
+		shadow = {
+			enabled = true,
+			range = 12,
             render_power = 3,
-            color        = "rgba(00000055)",
+			color = "rgba(00000055)",
         },
 
-        blur             = {
-            enabled  = true,
-            size     = 4,
-            passes   = 2,
+		blur = {
+			enabled = true,
+			size = 4,
+			passes = 2,
             vibrancy = 0.12,
         },
     },

@@ -143,7 +143,7 @@ bindkey -s '^kp' 'kctx -re "prod"'
 #############################################
 autoload zmv
 
-source $HOME/dotfiles/zsh/functions/.zshrc_functions
+source $HOME/dotfiles/zsh/functions/.zshrc_functions.sh
 
 if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
 	source /usr/share/fzf/key-bindings.zsh

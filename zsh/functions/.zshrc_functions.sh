@@ -262,3 +262,12 @@ commit_type_from_repo() {
  [[ -z "$selection" ]] && echo "$default" && return 0
  echo "${selection%%:*}(): "
 }
+
+ollama() {
+  local container
+  container=$(docker ps --format '{{.Names}} {{.Image}} {{.Ports}}' | awk 'tolower($0) ~ /ollama/ && /11434/ {print $1; exit}')
+
+  [[ -z "$container" ]] && { echo "No running Ollama container on port 11434 found." >&2; return 1; }
+
+  docker exec -it "$container" ollama "$@"
+}
