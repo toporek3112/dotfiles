@@ -4,6 +4,7 @@
 # for all options see ~/.oh-my-zsh/templates/zshrc.zsh-template
 export ZSH="$HOME/.oh-my-zsh"
 export ARCHFLAGS="-arch $(uname -m)"
+export EDITOR="/usr/bin/nvim"
 
 zstyle ':omz:update' mode reminder # just remind me to update when it's time
 
@@ -112,6 +113,8 @@ alias -g OPEN='| openpipe'
 #############################################
 ################ KEYBINDINGS ################
 #############################################
+bindkey '^@' autosuggest-accept
+
 bindkey -s '^Gl' 'git log'
 bindkey -s '^Gs' 'git status'
 bindkey -s '^Ga' 'git add .'
