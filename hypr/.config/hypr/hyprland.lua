@@ -14,15 +14,14 @@ local apps = require("modules.vars").apps
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("hyprshot")
-    hl.exec_cmd("swaync")
-    hl.exec_cmd("hyprpaper")
-    hl.exec_cmd("firefox")
-    hl.exec_cmd("flatpak run com.spotify.Client")
-    hl.exec_cmd("obsidian")
-    hl.exec_cmd("pkill code; pkill code-oss ;code") -- because apparently sometimes there is already an instance running
-    hl.exec_cmd("sleep 10; ~/.config/hypr/scripts/place_windows.sh")
+	hl.exec_cmd("waybar")
+	hl.exec_cmd("hyprshot")
+	hl.exec_cmd("swaync")
+	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("firefox")
+	hl.exec_cmd("obsidian")
+	hl.exec_cmd("pkill code; pkill code-oss ;code") -- because apparently sometimes there is already an instance running
+	hl.exec_cmd("sleep 10; ~/.config/hypr/scripts/place_windows.sh")
 end)
 
 -----------------------
@@ -40,7 +39,7 @@ end)
 -----------------------
 
 hl.config({
-    general = {
+	general = {
 		gaps_in = 4,
 		gaps_out = 5,
 
@@ -48,39 +47,39 @@ hl.config({
 
 		col = {
 			active_border = { colors = { "rgba(ff4c5bee)", "rgba(e03645ee)" }, angle = 45 },
-            inactive_border = "rgba(2a2b32aa)",
-        },
+			inactive_border = "rgba(2a2b32aa)",
+		},
 
-        resize_on_border = true,
+		resize_on_border = true,
 		allow_tearing = false,
 		layout = "dwindle",
-    },
+	},
 
-    decoration = {
+	decoration = {
 		rounding = 10,
 		rounding_power = 2,
 
 		active_opacity = 1.0,
-        inactive_opacity = 0.92,
+		inactive_opacity = 0.92,
 
 		shadow = {
 			enabled = true,
 			range = 12,
-            render_power = 3,
+			render_power = 3,
 			color = "rgba(00000055)",
-        },
+		},
 
 		blur = {
 			enabled = true,
 			size = 4,
 			passes = 2,
-            vibrancy = 0.12,
-        },
-    },
+			vibrancy = 0.12,
+		},
+	},
 
-    animations = {
-        enabled = true,
-    },
+	animations = {
+		enabled = true,
+	},
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
@@ -133,8 +132,9 @@ hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" 
 ----------------
 
 hl.config({
-    misc = {
-        force_default_wallpaper = 0,
-        disable_hyprland_logo   = true,
-    },
+	misc = {
+		force_default_wallpaper = 0,
+		disable_hyprland_logo = true,
+		disable_splash_rendering = true,
+	},
 })

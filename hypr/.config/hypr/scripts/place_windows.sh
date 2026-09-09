@@ -4,14 +4,11 @@
 hyprctl clients -j | jq -r '.[] | select(.class=="firefox") | [.address,.title] | @tsv' |
 	while IFS=$'\t' read -r addr title; do
 		case "$title" in
-		*AniWorld*)
+		*Netflix* | *YouTube* | *OnePiece* | *AniWorld*)
 			hyprctl dispatch "hl.dsp.window.move({ workspace = 3, follow = false, window = 'address:$addr' })"
 			;;
-		*Grafana* | *Thanos* | *Arch* | *Calendar*)
+		*Grafana* | *Thanos* | *Arch* | *Calendar* | *Google*)
 			hyprctl dispatch "hl.dsp.window.move({ workspace = 4, follow = false, window = 'address:$addr' })"
-			;;
-		*Netflix* | *YouTube* | *OnePiece*)
-			hyprctl dispatch "hl.dsp.window.move({ workspace = 9, follow = false, window = 'address:$addr' })"
 			;;
 		*WhatsApp* | *ChatGPT* | *Perplexity*)
 			hyprctl dispatch "hl.dsp.window.move({ workspace = 7, follow = false, window = 'address:$addr' })"

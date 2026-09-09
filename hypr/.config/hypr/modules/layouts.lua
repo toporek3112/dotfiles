@@ -75,6 +75,7 @@ local windows = {
     { name  = "workspace-02",match = { }, no_blur = true, workspace = "2" },
     { name  = "workspace-04", match = { }, no_blur = true, workspace = "4" },
     { name  = "workspace-07", match = { class = ".*(Obsidian|KeePass2).*" }, no_blur = true, workspace = "7", },
+    -- { name  = "workspace-08", match = { class = "steam" }, no_blur = true, workspace = "8", },
     { name  = "workspace-09", match = { class = "firefox" }, no_blur = true, workspace = "9", },
     
     ---- Example window rules that are useful
