@@ -138,6 +138,26 @@ bindkey -s '^kd' 'kctx -re "dev"'
 bindkey -s '^kn' 'kctx -re "nonprod"'
 bindkey -s '^kp' 'kctx -re "prod"'
 
+# time tracking
+timer-focus() {
+  ~/dotfiles/zsh/scripts/break-timer.sh session
+}
+timer-break() {
+  ~/dotfiles/zsh/scripts/break-timer.sh break
+}
+
+timer-stop() {
+  ~/dotfiles/zsh/scripts/break-timer.sh stop
+}
+
+zle -N timer-focus
+zle -N timer-break
+zle -N timer-stop
+
+bindkey '^Xf' timer-focus
+bindkey '^Xb' timer-break
+bindkey '^Xx' timer-stop
+
 #############################################
 ################## OTHER ####################
 #############################################
