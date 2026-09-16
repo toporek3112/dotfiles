@@ -4,7 +4,7 @@
 hyprctl clients -j | jq -r '.[] | select(.class=="firefox") | [.address,.title] | @tsv' |
 	while IFS=$'\t' read -r addr title; do
 		case "$title" in
-		*Netflix* | *YouTube* | *OnePiece* | *AniWorld*)
+		*Netflix* | *YouTube* | *OnePiece* | *AniWorld* | *Prime*)
 			hyprctl dispatch "hl.dsp.window.move({ workspace = 3, follow = false, window = 'address:$addr' })"
 			;;
 		*Grafana* | *Thanos* | *Arch* | *Calendar* | *Google*)

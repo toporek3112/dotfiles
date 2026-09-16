@@ -10,7 +10,11 @@ hl.config({
 
         follow_mouse = 1,
 
+        -- normal
         sensitivity = 0,
+        -- gaming
+        -- sensitivity = -0,5,
+
         scroll_factor = 1
     },
 })
