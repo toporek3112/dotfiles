@@ -145,6 +145,7 @@ bindkey -s '^kp' 'kctx -re "prod"'
 timer-focus() {
   ~/dotfiles/zsh/scripts/break-timer.sh session
 }
+
 timer-break() {
   ~/dotfiles/zsh/scripts/break-timer.sh break
 }
@@ -172,6 +173,9 @@ if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
 	source /usr/share/fzf/key-bindings.zsh
 fi
 
+# Java
+export JAVA_HOME="$HOME/.local/lib/jvm/temurin-25"
+export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 if [[ -x "$HOME/.lmstudio/bin/lms" ]]; then
 	export PATH="$PATH:/home/toporek3112/.lmstudio/bin"
