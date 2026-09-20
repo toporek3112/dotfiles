@@ -10,7 +10,7 @@ local vars = {
     monitors = {
         top    = "desc:Samsung Electric Company C27FG70 HTHJ400809",
         bottom = "desc:Samsung Electric Company C27FG70 HTHJ301585",
-        right  = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
+        side  = "desc:Samsung Electric Company SAMSUNG 0x01000E00",
     },
     keypad = {
         [1]  = "KP_End",

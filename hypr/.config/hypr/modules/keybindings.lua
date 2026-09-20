@@ -6,7 +6,7 @@ local vars = require("modules.vars")
 ------ MONITORS ------
 ---------------------
 hl.bind("CTRL + ALT + " .. vars.keypad[1] , hl.dsp.dpms({ action = "toggle", monitor = vars.monitors.bottom }))
-hl.bind("CTRL + ALT + " .. vars.keypad[2] , hl.dsp.dpms({ action = "toggle", monitor = vars.monitors.right }))
+hl.bind("CTRL + ALT + " .. vars.keypad[2] , hl.dsp.dpms({ action = "toggle", monitor = vars.monitors.side }))
 hl.bind("CTRL + ALT + " .. vars.keypad[3] , hl.dsp.dpms({ action = "toggle", monitor = vars.monitors.top }))
 
 --------------------

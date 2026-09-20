@@ -6,28 +6,28 @@ local monitors = require("modules.vars").monitors
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 -- top monitor 
+-- portrait on the left of both (180° rotation)
 hl.monitor({
-    output   = monitors.top,
-    mode     = "1920x1080@120",
+	output = monitors.side,
+	mode = "1920x1080@60",
     position = "0x0",
-    scale    = 1,
+	scale = 1,
+	transform = 1,
+})
+
+hl.monitor({
+	output = monitors.top,
+	mode = "1920x1080@120",
+	position = "1080x0",
+	scale = 1,
 })
 
 -- bottom monitor (directly below DP-4)
 hl.monitor({
-    output   = monitors.bottom,
-    mode     = "1920x1080@60",
-    position = "0x1080",
-    scale    = 1,
-})
-
--- portrait on the right of both (90° rotation)
-hl.monitor({
-    output    = monitors.right,
-    mode      = "1920x1080@60",
-    position  = "1920x120",
-    scale     = 1,
-    transform = 3,
+	output = monitors.bottom,
+	mode = "1920x1080@60",
+	position = "1080x1080",
+	scale = 1,
 })
 
 -----------------------
@@ -37,20 +37,25 @@ hl.monitor({
 
 local workspaces = {
     -- special workspaces
-    { workspace = "special:spotify", monitor = monitors.right,  default = true, on_created_empty = "flatpak run com.spotify.Client"},
-    { workspace = "special:terminal", monitor = monitors.right,  default = true, on_created_empty = "kitty"},
+	{
+		workspace = "special:spotify",
+		monitor = monitors.side,
+		default = true,
+		on_created_empty = "flatpak run com.spotify.Client",
+	},
+	{ workspace = "special:terminal", monitor = monitors.side, default = true, on_created_empty = "kitty" },
     -- normal workspaces
-    { workspace = "1", monitor = monitors.bottom, persistent = true,  default = true},
-    { workspace = "2", monitor = monitors.bottom, persistent = true,  default = true },
-    { workspace = "3", monitor = monitors.bottom, persistent = true,  default = true },
-    { workspace = "4", monitor = monitors.top, persistent = true,  default = true},
-    { workspace = "5", monitor = monitors.top, persistent = true, default = true},
-    { workspace = "6", monitor = monitors.top, persistent = true,  default = true },
-    { workspace = "7", monitor = monitors.right, persistent = true,  default = true },
-    { workspace = "8", monitor = monitors.right, persistent = true,  default = true },
-    { workspace = "9", monitor = monitors.right, persistent = true,  default = true },
+	{ workspace = "1", monitor = monitors.bottom, persistent = true, default = true },
+	{ workspace = "2", monitor = monitors.bottom, persistent = true, default = true },
+	{ workspace = "3", monitor = monitors.bottom, persistent = true, default = true },
+	{ workspace = "4", monitor = monitors.top, persistent = true, default = true },
+	{ workspace = "5", monitor = monitors.top, persistent = true, default = true },
+	{ workspace = "6", monitor = monitors.top, persistent = true, default = true },
+	{ workspace = "7", monitor = monitors.side, persistent = true, default = true },
+	{ workspace = "8", monitor = monitors.side, persistent = true, default = true },
+	{ workspace = "9", monitor = monitors.side, persistent = true, default = true },
     -- other
-    { workspace = "m[" .. monitors.right .. "]", layout = "scrolling", layout_opts = { direction = "down" }}
+	{ workspace = "m[" .. monitors.side .. "]", layout = "scrolling", layout_opts = { direction = "down" } },
 }
 
 for _, workspace in ipairs(workspaces) do
