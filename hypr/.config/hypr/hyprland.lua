@@ -20,6 +20,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("firefox")
 	hl.exec_cmd("obsidian")
+	hl.exec_cmd("proton-mail")
 	hl.exec_cmd("pkill code; pkill code-oss ;code") -- because apparently sometimes there is already an instance running
 	hl.exec_cmd("sleep 10; ~/.config/hypr/scripts/place_windows.sh")
 end)

@@ -5,12 +5,12 @@
 local monitors = require("modules.vars").monitors
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
--- top monitor 
+-- top monitor
 -- portrait on the left of both (180° rotation)
 hl.monitor({
 	output = monitors.side,
 	mode = "1920x1080@60",
-    position = "0x0",
+	position = "0x0",
 	scale = 1,
 	transform = 1,
 })
@@ -36,7 +36,7 @@ hl.monitor({
 -- https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
 local workspaces = {
-    -- special workspaces
+	-- special workspaces
 	{
 		workspace = "special:spotify",
 		monitor = monitors.side,
@@ -44,7 +44,7 @@ local workspaces = {
 		on_created_empty = "flatpak run com.spotify.Client",
 	},
 	{ workspace = "special:terminal", monitor = monitors.side, default = true, on_created_empty = "kitty" },
-    -- normal workspaces
+	-- normal workspaces
 	{ workspace = "1", monitor = monitors.bottom, persistent = true, default = true },
 	{ workspace = "2", monitor = monitors.bottom, persistent = true, default = true },
 	{ workspace = "3", monitor = monitors.bottom, persistent = true, default = true },
@@ -54,12 +54,12 @@ local workspaces = {
 	{ workspace = "7", monitor = monitors.side, persistent = true, default = true },
 	{ workspace = "8", monitor = monitors.side, persistent = true, default = true },
 	{ workspace = "9", monitor = monitors.side, persistent = true, default = true },
-    -- other
+	-- other
 	{ workspace = "m[" .. monitors.side .. "]", layout = "scrolling", layout_opts = { direction = "down" } },
 }
 
 for _, workspace in ipairs(workspaces) do
-    hl.workspace_rule(workspace)
+	hl.workspace_rule(workspace)
 end
 
 --------------------
@@ -67,35 +67,49 @@ end
 --------------------
 -- https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 
+-- Window Rules
 local windows = {
-    -- window placing 
-    { name  = "always-float", match = { class = ".*(satty).*" }, float = true },
-    
-    -- default special workspaces for applications
-    {name  = "spotify", match = { class = ".*(spotify).*" }, workspace = "special:spotify"},
-    {name  = "terminal", match = { }, workspace = "special:terminal"},
-    
-    -- default normal workspaces for applications
-    { name  = "workspace-01", match = { class = "code-oss"}, no_blur = true, workspace = "1" },
-    { name  = "workspace-02",match = { }, no_blur = true, workspace = "2" },
-    { name  = "workspace-04", match = { }, no_blur = true, workspace = "4" },
-    { name  = "workspace-07", match = { class = ".*(Obsidian|KeePass2).*" }, no_blur = true, workspace = "7", },
-    -- { name  = "workspace-08", match = { class = "steam" }, no_blur = true, workspace = "8", },
-    { name  = "workspace-09", match = { class = "firefox" }, no_blur = true, workspace = "9", },
-    
-    ---- Example window rules that are useful
-    -- Ignore maximize requests from all apps. You'll probably like this.
-    { name  = "suppress-maximize-events", match = { class = ".*" }, suppress_event = "maximize",},
-    -- Fix some dragging issues with XWayland
-    { name  = "fix-xwayland-drags", match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false }, no_focus = true,}
-    -- Layer rules also return a handle.
-    -- https://wiki.hypr.land/Configuring/Basics/Window-Rules/#layer-rules
-    -- local overlayLayerRule = hl.layer_rule({ name  = "no-anim-overlay", match = { namespace = "^my-overlay$" }, no_anim = true, })
-    -- overlayLayerRule:set_enabled(false)
+	-- window placing
+	{ name = "always-float", match = { class = ".*(satty).*" }, float = true },
+
+	-- default special workspaces for applications
+	{ name = "spotify", match = { class = ".*(spotify).*" }, workspace = "special:spotify" },
+	{ name = "terminal", match = {}, workspace = "special:terminal" },
+
+	-- default normal workspaces for applications
+	{ name = "workspace-01", match = { class = "code-oss" }, no_blur = true, workspace = "1" },
+	{ name = "workspace-02", match = {}, no_blur = true, workspace = "2" },
+	{ name = "workspace-04", match = {}, no_blur = true, workspace = "4" },
+	{ name = "workspace-05", match = { class = ".*proton-mail.*" }, no_blur = true, workspace = "5" },
+	{ name = "workspace-07", match = { class = ".*(Obsidian|KeePass2).*" }, no_blur = true, workspace = "7" },
+	-- { name  = "workspace-08", match = { class = "steam" }, no_blur = true, workspace = "8", },
+	{ name = "workspace-09", match = { class = "firefox" }, no_blur = true, workspace = "9" },
+
+	---- Example window rules that are useful
+	-- Ignore maximize requests from all apps. You'll probably like this.
+	{ name = "suppress-maximize-events", match = { class = ".*" }, suppress_event = "maximize" },
+	-- Fix some dragging issues with XWayland
+	{
+		name = "fix-xwayland-drags",
+		match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
+		no_focus = true,
+	},
+	{
+		match = {
+			class = "^firefox$",
+			title = [[.*(Prime Video|Netflix|Disney\+|YouTube|Twitch).*]],
+		},
+
+		opacity = "1.0 override 1.0 override 1.0 override",
+	},
+	-- Layer rules also return a handle.
+	-- https://wiki.hypr.land/Configuring/Basics/Window-Rules/#layer-rules
+	-- local overlayLayerRule = hl.layer_rule({ name  = "no-anim-overlay", match = { namespace = "^my-overlay$" }, no_anim = true, })
+	-- overlayLayerRule:set_enabled(false)
 }
 
 for _, window in ipairs(windows) do
-    hl.window_rule(window)
+	hl.window_rule(window)
 end
 
 -------------------
@@ -103,10 +117,10 @@ end
 -------------------
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
-    dwindle = {
-        preserve_split = true, -- You probably want this
-        force_split = 2
-    },
+	dwindle = {
+		preserve_split = true, -- You probably want this
+		force_split = 2,
+	},
 })
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
