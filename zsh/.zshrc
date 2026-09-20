@@ -33,7 +33,7 @@ setopt HIST_NO_STORE          # Don't store history commands
 ##################################################
 ################### VARIABLES ####################
 ##################################################
-export ANSIBLE_NOCOWS=1#
+export ANSIBLE_NOCOWS=1
 if [ -d "$HOME/.kube/clusters" ]; then
 	export KUBECONFIG=$(find ~/.kube/clusters -type f | tr '\n' ':')
 fi
