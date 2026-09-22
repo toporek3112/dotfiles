@@ -135,11 +135,12 @@ bindkey '^Gc' _git_commit_widget
 bindkey -s '^Gcc' 'echo "$(git remote get-url origin | sed 's/\.git$//')/commit/$(git rev-parse HEAD)" C'
 bindkey -s '^Gp' 'git push origin BRANCH' # Ctrl-g p
 bindkey -s '^Q' '\\`\\`\C-b\C-b'
-bindkey -s '^Kk' 'kctx -re ""\C-b'
-bindkey -s '^Kc' 'kctx -re "crossplane"'
-bindkey -s '^kd' 'kctx -re "dev"'
-bindkey -s '^kn' 'kctx -re "nonprod"'
-bindkey -s '^kp' 'kctx -re "prod"'
+# have to think of a different prefix as K since I use vim like navigation in tmux
+# bindkey -s '^Kk' 'kctx -re ""\C-b'
+# bindkey -s '^Kc' 'kctx -re "crossplane"'
+# bindkey -s '^kd' 'kctx -re "dev"'
+# bindkey -s '^kn' 'kctx -re "nonprod"'
+# bindkey -s '^kp' 'kctx -re "prod"'
 
 # time tracking
 timer-focus() {
@@ -165,6 +166,11 @@ bindkey '^Xx' timer-stop
 #############################################
 ################## OTHER ####################
 #############################################
+hash -d kubernetes="$HOME/Projects/home_lab/kubernetes"
+hash -d ansible="$HOME/Projects/home_lab/ansible"
+hash -d terraform="$HOME/Projects/home_lab/terraform"
+hash -d dashboards="$HOME/Projects/dashboards/grafana/"
+
 autoload zmv
 
 source $HOME/dotfiles/zsh/functions/.zshrc_functions.sh
@@ -173,16 +179,31 @@ if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
 	source /usr/share/fzf/key-bindings.zsh
 fi
 
+## PATH settings
+
+# Keep PATH entries unique
+typeset -U path PATH
+
 # Java
 export JAVA_HOME="$HOME/.local/lib/jvm/temurin-25"
 export PATH="$JAVA_HOME/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-if [[ -x "$HOME/.lmstudio/bin/lms" ]]; then
-	export PATH="$PATH:/home/toporek3112/.lmstudio/bin"
-fi 
 
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
+
+# LM Studio
+if [[ -x "$HOME/.lmstudio/bin/lms" ]]; then
+  export PATH="$PATH:$HOME/.lmstudio/bin"
+fi
+
+# PlatformIO
 if [[ -x "$HOME/.platformio/penv/bin/pio" ]]; then
   export PATH="$PATH:$HOME/.platformio/penv/bin"
+fi
+
+# kubectl krew
+if [[ -x "${KREW_ROOT:-$HOME/.krew}/bin/kubectl-krew" ]]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
 # >>> conda initialize >>>

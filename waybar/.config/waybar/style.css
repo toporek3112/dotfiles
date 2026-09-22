@@ -75,7 +75,7 @@ window#waybar.bottom-horizontal {
 
 #workspaces button.focused,
 #workspaces button.active {
-    background: alpha(@red_deep, 0.3);
+    background: alpha(@red_deep, 0.5);
     /* padding: 10px;
     margin: 5px; */
     transition: all 500ms ease;
@@ -92,7 +92,7 @@ window#waybar.bottom-horizontal {
 
 #workspaces .taskbar-window {
     padding: 2px 5px;
-    margin: 5px;
+    /* margin: 1px; */
     border-radius: 20px;
 }
 
