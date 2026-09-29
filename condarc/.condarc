@@ -1,4 +1,5 @@
 # conda install -n base conda-libmamba-solver -y
+# conda install -n base conda-rattler-solver -y
 solver: rattler
 channel_priority: flexible
 channels:
