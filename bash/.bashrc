@@ -11,8 +11,11 @@ export PROMPT_COMMAND='history -a'
 ################### VARIABLES ####################
 ##################################################
 export ANSIBLE_NOCOWS=1
-export KUBECONFIG=$(find ~/.kube/clusters -type f | tr '\n' ':')
-alias reset_kubeconfig="export KUBECONFIG=$(find ~/.kube/clusters -type f | tr '\n' ':')"
+
+if [ -d "$HOME/.kube/clusters" ]; then
+  export KUBECONFIG=$(find ~/.kube/clusters -type f | tr '\n' ':')
+  alias reset_kubeconfig="export KUBECONFIG=$(find ~/.kube/clusters -type f | tr '\n' ':')"
+fi
 
 ##################################################
 #################### ALIASES #####################
@@ -26,6 +29,7 @@ alias ll='ls -lha $LS_OPTIONS'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias cls='clear -x'
 
 # docker
 alias compose='docker-compose'
@@ -56,3 +60,6 @@ alias code="/mnt/c/Program\ Files/Microsoft\ VS\ Code/Code.exe"
 W() { watch "$*"; }
 
 source $HOME/.bashrc_extra
+
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
