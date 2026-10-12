@@ -56,8 +56,8 @@ return {
     opts = {
       defaults = {
         layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
-        sorting_strategy = "ascending",
+        layout_config = { prompt_position = "bottom" },
+        sorting_strategy = "descending",
         winblend = 0,
       },
     },
