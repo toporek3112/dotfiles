@@ -30,12 +30,17 @@ setopt HIST_VERIFY            # Do not execute immediately upon history expansio
 setopt APPEND_HISTORY         # append to history file
 setopt HIST_NO_STORE          # Don't store history commands
 
+# disable EOF to prevent closing panes 
+setopt IGNORE_EOF
+
 ##################################################
 ################### VARIABLES ####################
 ##################################################
 export ANSIBLE_NOCOWS=1
+
 if [ -d "$HOME/.kube/clusters" ]; then
 	export KUBECONFIG=$(find ~/.kube/clusters -type f | tr '\n' ':')
+  alias reset_kubeconfig="export KUBECONFIG=$(find ~/.kube/clusters -type f | tr '\n' ':')"
 fi
 
 ##################################################
@@ -97,7 +102,7 @@ if command -v wl-copy >/dev/null 2>&1; then
 fi
 
 # suffix aliases
-for ext in yaml json yml py go js ts md txt; do
+for ext in yaml json yml md txt; do
 	alias -s $ext="nvim"
 done
 
@@ -170,6 +175,7 @@ hash -d kubernetes="$HOME/Projects/home_lab/kubernetes"
 hash -d ansible="$HOME/Projects/home_lab/ansible"
 hash -d terraform="$HOME/Projects/home_lab/terraform"
 hash -d dashboards="$HOME/Projects/dashboards/grafana/"
+hash -d projects="$HOME/Projects"
 
 autoload zmv
 
