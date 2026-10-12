@@ -14,7 +14,10 @@ hl.bind("CTRL + ALT + " .. vars.keypad[3], hl.dsp.dpms({ action = "toggle", moni
 --------------------
 
 hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd("kitty"))
-hl.bind(vars.keys.mainMod .. "+ ALT + R",hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(
+	vars.keys.mainMod .. "+ ALT + R",
+	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
+)
 hl.bind(vars.keys.mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(vars.keys.mainMod .. " + E", hl.dsp.exec_cmd(vars.apps.fileManager .. " --new-window"))
 hl.bind(vars.keys.mainMod .. " + SPACE", hl.dsp.exec_cmd(vars.apps.menu))
@@ -85,8 +88,8 @@ end
 hl.bind(vars.keys.mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(vars.keys.mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(vars.keys.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(vars.keys.mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(vars.keys.mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(vars.keys.mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e+1" }))
 -- Move focused window to next/previous workspace with mainMod + scroll
 hl.bind(vars.keys.mainMod .. " + SHIFT + mouse_down", hl.dsp.window.move({ workspace = "e+1" }))
 hl.bind(vars.keys.mainMod .. " + SHIFT + mouse_up", hl.dsp.window.move({ workspace = "e-1" }))
