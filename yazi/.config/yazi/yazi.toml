@@ -1,0 +1,8 @@
+[preview]
+max_width = 2000
+max_height = 2000
+
+[mgr]
+sort_by = "natural"
+show_symlink = true
+

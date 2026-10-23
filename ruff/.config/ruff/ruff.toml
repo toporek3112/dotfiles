@@ -1,5 +1,5 @@
-indent-width = 2
-line-length = 300
+indent-width = 4
+line-length = 300 
 
 [format]
 indent-style = "space"

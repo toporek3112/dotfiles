@@ -82,6 +82,7 @@ alias clusters='l ~/.kube/clusters'
 # other
 alias cls="clear -x"
 alias aconda="eval $(/usr/local/bin/miniconda3/miniconda3/bin/conda shell.zsh activate)"
+alias mssh="${HOME}/dotfiles/zsh/scripts/ssh-multi-node.sh"
 
 # global aliases (zsh specific)
 alias -g NE="2>/dev/null"
@@ -213,16 +214,16 @@ if [[ -x "${KREW_ROOT:-$HOME/.krew}/bin/kubectl-krew" ]]; then
 fi
 
 # >>> conda initialize >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/usr/local/bin/miniconda3/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh" ]; then
-#         . "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/usr/local/bin/miniconda3/miniconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
+ # !! Contents within this block are managed by 'conda init' !!
+ __conda_setup="$('/usr/local/bin/miniconda3/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+ if [ $? -eq 0 ]; then
+     eval "$__conda_setup"
+ else
+     if [ -f "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh" ]; then
+         . "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh"
+     else
+         export PATH="/usr/local/bin/miniconda3/miniconda3/bin:$PATH"
+     fi
+ fi
+ unset __conda_setup
 # <<< conda initialize <<<
