@@ -83,6 +83,7 @@ alias clusters='l ~/.kube/clusters'
 alias cls="clear -x"
 alias aconda="eval $(/usr/local/bin/miniconda3/miniconda3/bin/conda shell.zsh activate)"
 alias mssh="${HOME}/dotfiles/zsh/scripts/ssh-multi-node.sh"
+alias kb="kustomize build --enable-helm"
 
 # global aliases (zsh specific)
 alias -g NE="2>/dev/null"
