@@ -7,7 +7,7 @@ hyprctl clients -j | jq -r '.[] | select(.class=="firefox") | [.address,.title] 
     *Netflix* | *YouTube* | *OnePiece* | *AniWorld* | *Prime* | *Disney* | *pdf*)
       hyprctl dispatch "hl.dsp.window.move({ workspace = 2, follow = false, window = 'address:$addr' })"
       ;;
-    *Grafana* | *Thanos* | *Arch* | *Calendar* | *Google* | *DuckDuckGo*)
+    *Grafana* | *grafana* | *Thanos* | *Arch* | *Calendar* | *Google* | *DuckDuckGo*)
       hyprctl dispatch "hl.dsp.window.move({ workspace = 4, follow = false, window = 'address:$addr' })"
       ;;
     *WhatsApp* | *ChatGPT* | *Perplexity*)
