@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #############################################
 ################ OH MY ZSH ##################
 #############################################
@@ -84,6 +91,7 @@ alias cls="clear -x"
 alias aconda="eval $(/usr/local/bin/miniconda3/miniconda3/bin/conda shell.zsh activate)"
 alias mssh="${HOME}/dotfiles/zsh/scripts/ssh-multi-node.sh"
 alias kb="kustomize build --enable-helm"
+alias sanitize_monthly_note_links="sed -Ei.bak 's#\[\[([^]|]*/)?([0-9]{2}\.[0-9]{2}\.[0-9]{4})\]\]#[[\1\2|\2]]#g'"
 
 # global aliases (zsh specific)
 alias -g NE="2>/dev/null"
@@ -216,15 +224,18 @@ fi
 
 # >>> conda initialize >>>
  # !! Contents within this block are managed by 'conda init' !!
- __conda_setup="$('/usr/local/bin/miniconda3/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
- if [ $? -eq 0 ]; then
-     eval "$__conda_setup"
- else
-     if [ -f "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh" ]; then
-         . "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh"
-     else
-         export PATH="/usr/local/bin/miniconda3/miniconda3/bin:$PATH"
-     fi
- fi
- unset __conda_setup
-# <<< conda initialize <<<
+# __conda_setup="$('/usr/local/bin/miniconda3/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/usr/local/bin/miniconda3/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/usr/local/bin/miniconda3/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+## <<< conda initialize <<<
+
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/p10k/.p10k.zsh.
+[[ ! -f ~/dotfiles/p10k/.p10k.zsh ]] || source ~/dotfiles/p10k/.p10k.zsh
