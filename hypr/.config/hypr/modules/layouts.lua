@@ -43,7 +43,7 @@ local workspaces = {
 		default = true,
 		on_created_empty = "flatpak run com.spotify.Client",
 	},
-	{ workspace = "special:terminal", monitor = monitors.side, default = true, on_created_empty = "kitty" },
+	{ workspace = "special:terminal", default = true, gaps_in = 0, on_created_empty = "kitty" },
 	-- normal workspaces
 	{ workspace = "1", monitor = monitors.bottom, persistent = true, default = true },
 	{ workspace = "2", monitor = monitors.bottom, persistent = true, default = true },
