@@ -37,13 +37,8 @@ hl.monitor({
 
 local workspaces = {
 	-- special workspaces
-	{
-		workspace = "special:spotify",
-		monitor = monitors.side,
-		default = true,
-		on_created_empty = "flatpak run com.spotify.Client",
-	},
-	{ workspace = "special:terminal", default = true, gaps_in = 0, on_created_empty = "kitty" },
+	{ workspace = "special:spotify", monitor = monitors.side, default = true },
+	{ workspace = "special:terminal", default = true, gaps_in = 0 }, -- on_created_empty = "kitty" },
 	-- normal workspaces
 	{ workspace = "1", monitor = monitors.bottom, persistent = true, default = true },
 	{ workspace = "2", monitor = monitors.bottom, persistent = true, default = true },
@@ -84,12 +79,10 @@ local windows = {
 
 	-- default special workspaces for applications
 	{ name = "spotify", match = { class = ".*(spotify).*" }, workspace = "special:spotify" },
-	{ name = "terminal", match = {}, workspace = "special:terminal" },
+	{ name = "terminal", match = { class = ".*(kitty).*" }, workspace = "special:terminal" },
 
 	-- default normal workspaces for applications
 	{ name = "workspace-01", match = { class = "code-oss" }, no_blur = true, workspace = "1" },
-	{ name = "workspace-02", match = {}, no_blur = true, workspace = "2" },
-	{ name = "workspace-04", match = {}, no_blur = true, workspace = "4" },
 	{ name = "workspace-05", match = { class = ".*proton-mail.*" }, no_blur = true, workspace = "5" },
 	{ name = "workspace-07", match = { class = ".*(Obsidian|KeePass2).*" }, no_blur = true, workspace = "7" },
 	-- { name  = "workspace-08", match = { class = "steam" }, no_blur = true, workspace = "8", },
@@ -99,19 +92,8 @@ local windows = {
 	-- Ignore maximize requests from all apps. You'll probably like this.
 	{ name = "suppress-maximize-events", match = { class = ".*" }, suppress_event = "maximize" },
 	-- Fix some dragging issues with XWayland
-	{
-		name = "fix-xwayland-drags",
-		match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
-		no_focus = true,
-	},
-	{
-		match = {
-			class = "^firefox$",
-			title = [[.*(Prime Video|Netflix|Disney\+|YouTube|Twitch).*]],
-		},
-
-		opacity = "1.0 override 1.0 override 1.0 override",
-	},
+	{ name = "fix-xwayland-drags", match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false }, no_focus = true },
+	{ match = { class = "^firefox$", title = [[.*(Prime Video|Netflix|Disney\+|YouTube|Twitch).*]] }, opacity = "1.0 override 1.0 override 1.0 override" },
 	-- Layer rules also return a handle.
 	-- https://wiki.hypr.land/Configuring/Basics/Window-Rules/#layer-rules
 	-- local overlayLayerRule = hl.layer_rule({ name  = "no-anim-overlay", match = { namespace = "^my-overlay$" }, no_anim = true, })
