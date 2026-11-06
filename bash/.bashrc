@@ -24,6 +24,7 @@ fi
 export LS_OPTIONS='--color=auto'
 alias l='ls -lh $LS_OPTIONS'
 alias ll='ls -lha $LS_OPTIONS'
+alias l1='ls -1'
 
 # Some more alias to avoid making mistakes:
 alias rm='rm -i'
