@@ -62,6 +62,16 @@ for _, workspace in ipairs(workspaces) do
 	hl.workspace_rule(workspace)
 end
 
+hl.on("workspace.created", function(ws)
+	if ws.name == "special:terminal" and ws.is_empty then
+		hl.exec_cmd("kitty", { workspace = "special:terminal silent" })
+	end
+
+	if ws.name == "special:spotify" and ws.is_empty then
+		hl.exec_cmd("flatpak run com.spotify.Client", { workspace = "special:spotify silent" })
+	end
+end)
+
 --------------------
 ------ WINDOWS ------
 --------------------
