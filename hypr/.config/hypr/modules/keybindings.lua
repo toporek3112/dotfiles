@@ -14,10 +14,7 @@ hl.bind("CTRL + ALT + " .. vars.keypad[3], hl.dsp.dpms({ action = "toggle", moni
 --------------------
 
 hl.bind("CTRL + ALT + t", hl.dsp.exec_cmd("kitty"))
-hl.bind(
-	vars.keys.mainMod .. "+ ALT + R",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
-)
+hl.bind(vars.keys.mainMod .. "+ ALT + R", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(vars.keys.mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(vars.keys.mainMod .. " + E", hl.dsp.exec_cmd(vars.apps.fileManager .. " --new-window"))
 hl.bind(vars.keys.mainMod .. " + SPACE", hl.dsp.exec_cmd(vars.apps.menu))
@@ -27,7 +24,8 @@ hl.bind(vars.keys.mainMod .. " + R", hl.dsp.exec_cmd("~/dotfiles/waybar/.config/
 -- Screenshots
 hl.bind(vars.keys.mainMod .. " + s", hl.dsp.exec_cmd("hyprshot -m window --freeze --raw  | satty -f -"))
 hl.bind(vars.keys.mainMod .. " + SHIFT + s", hl.dsp.exec_cmd("hyprshot -m region --freeze --raw  | satty -f -"))
-
+-- Ausio
+hl.bind(vars.keys.mainMod .. " + A", hl.dsp.exec_cmd("~/dotfiles/hypr/.config/hypr/scripts/cycle-audio-output-devices.sh"))
 -- hl.bind(vars.keys.mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(vars.keys.mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
@@ -114,26 +112,10 @@ hl.bind(vars.keys.mainMod .. " + ALT + X", hl.dsp.workspace.toggle_special("term
 --- KEYBOARD ---
 ----------------
 -- Keyboard multimedia keys for volume and LCD brightness
-hl.bind(
-	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
-	{ locked = true, repeating = true }
-)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
 ---- Requires playerctl
