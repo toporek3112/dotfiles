@@ -83,9 +83,9 @@ local windows = {
 
 	-- default normal workspaces for applications
 	{ name = "workspace-01", match = { class = "code-oss" }, no_blur = true, workspace = "1" },
-	{ name = "workspace-05", match = { class = ".*proton-mail.*" }, no_blur = true, workspace = "5" },
+	{ name = "workspace-06", match = { class = ".*proton-mail.*" }, no_blur = true, workspace = "6" },
 	{ name = "workspace-07", match = { class = ".*(Obsidian|KeePass2).*" }, no_blur = true, workspace = "7" },
-	-- { name  = "workspace-08", match = { class = "steam" }, no_blur = true, workspace = "8", },
+	{ name = "workspace-08", match = { class = "discord" }, no_blur = true, workspace = "8" },
 	{ name = "workspace-09", match = { class = "firefox" }, no_blur = true, workspace = "9" },
 
 	---- Example window rules that are useful
